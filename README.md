@@ -9,7 +9,7 @@ The decision depends on his/her banking history and other parameters mentioned b
 **Source Dataset**:
 > https://www.openml.org/search?type=data&sort=runs&status=active&id=40900
 
-**Featues used**:
+**Featues from the dataset**:
 
 | Feature Name           | Description                                 |
 |------------------------|---------------------------------------------|
