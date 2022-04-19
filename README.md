@@ -39,7 +39,7 @@ The decision depends on his/her banking history and other parameters mentioned b
 
 **Problem Type:** Binary Classification (Supervised Learning)
 
-**Algoritms:** Logistic Regression,Random Forest,XGBoost
+**Algorithms:** Logistic Regression,Random Forest,XGBoost
 
 ## Setup
 ``` pip install -r requirements.txt ```
