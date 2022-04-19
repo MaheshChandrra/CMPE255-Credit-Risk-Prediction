@@ -1,5 +1,7 @@
 # CMPE255-Credit-Risk-Prediction
-Defaulted loans are a rising problem for most banks and lending institutions. Credit risk analysis is the first and most important phase in the loan approval process in order to avoid or lessen the effects of the disaster. When a debt defaults, it causes damage.
+
+## Introduction
+Defaulted loans are a rising problem for most banks and lending institutions. Credit risk analysis is the first and most important phase in the loan approval process in order to avoid or lessen the effects of the disaster. When a debt defaults, it causes damage. 
 From this project we aim to build a model to predict whether a person is eligible to get a credit or not.
 The decision depends on his/her banking history and other parameters mentioned below.
 
