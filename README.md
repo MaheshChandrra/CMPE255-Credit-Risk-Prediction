@@ -35,3 +35,8 @@ The decision depends on his/her banking history and other parameters mentioned b
 | Mareedu Mahesh Chandra          | Developer | https://github.com/MaheshChandrra |
 
 
+## Methodology
+
+**Problem Type:** Binary Classification (Supervised Learning)
+
+**Algoritms:** Logistic Regression,Random Forest,XGBoost
