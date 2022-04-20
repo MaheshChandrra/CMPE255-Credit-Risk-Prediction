@@ -83,7 +83,7 @@ Below are the to-do items:
 * Create train test splits (Stratified sampling)
 * Building model pipeline
 * Training the data
-* Validaing the data
+* Validating the data
     *   Accuracy
     *   Precision
     *   Re-Call
