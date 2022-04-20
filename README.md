@@ -84,6 +84,11 @@ Below are the to-do items:
 * Building model pipeline
 * Training the data
 * Validaing the data
+    *   Accuracy
+    *   Precision
+    *   Re-Call
+    *   F1-Score
+    *   ROC-AUC Curve
 * Parameter tuning
 * Saving model
 * Deployment using flask
