@@ -51,7 +51,7 @@ In the data, we have missing values from the 'personemplength' and 'loan_int_rat
 
 **Algorithms:** Logistic Regression,Random Forest,XGBoost
 
-The dataset is a combination of Numerical and Categorical data,requires preprocessing  and analysis on each of the features before building the model.
+The dataset is a combination of numerical and categorical data,requires preprocessing  and analysis on each of the features before building the model.
 
 Below are the to-do items:
 
