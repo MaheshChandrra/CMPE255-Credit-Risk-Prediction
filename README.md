@@ -64,7 +64,7 @@ Below are the to-do items:
 
 **On Target label Data**:
     
-* Identifying total discre classes
+* Identifying total discrete classes
 * Analyzing and visualizing the distritbution of data by class
 * If imbalance is identified,upsampling or downsampling is implemented
 
