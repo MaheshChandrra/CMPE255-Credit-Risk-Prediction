@@ -5,6 +5,10 @@ import seaborn as sns
 import plotly.figure_factory as ff
 import numpy as np
 from IPython.display import display
+import plotly.express as px
+
+
+IMG_DIR="../paper\images/"
 
 def check_missing_columns(df_in):
     """
@@ -94,7 +98,7 @@ def visualize_pdf(df_in,col,bool_describe_data):
     
     ##Seaborn plot
     sns.kdeplot(data=df_temp, x=col)
-    graph_file='../paper\images\dist_plot_'+col+'.png'
+    graph_file='dist_plot_'+col+'.png'
     plt.savefig(graph_file)
     plt.show()
     
@@ -134,5 +138,53 @@ def impute_missing_values(df_in,features_with_missing_values):
         imputed_value_dict[col]=mean_value
         
     return df_in,imputed_value_dict
+
+def get_correlation_heatmap(df_in):
+    """
+    Author : Mareedu Mahesh Chandra
+    
+    This function takes in a dataframe visualizes heap map with correlation values among the numerical features.
+    
+    Params:
+    -------------------
+    input: df_in
+           =>dataframe
+    -------------------
     
     
+    """
+    ax = sns.heatmap(df_in.corr(), cmap="YlGnBu",annot=True)
+    graph_file=IMG_DIR+'coorelation_heapmatap.png'
+    plt.savefig(graph_file)
+    plt.show()
+    
+def get_correlation_pairplot(df_in,target_label=None):
+    """
+    Author : Mareedu Mahesh Chandra
+    
+    This function takes in a dataframe visualizes pair plots to understand positive/negative correlation among features.
+    
+    Params:
+    -------------------
+    input: df_in
+           =>dataframe
+           
+           target_label
+           => If target is provided then pair plot would datapoints divided by target label
+    -------------------
+    
+    
+    """
+#     ax = sns.heatmap(df_in.corr(), cmap="YlGnBu",annot=True)
+#     graph_file=IMG_DIR+'coorelation_pairplot.png'
+#     plt.savefig(graph_file)
+#     plt.show()
+    if target_label==None:
+        fig = px.scatter_matrix(df_in)
+        fig.show()
+    else:
+        fig = px.scatter_matrix(df_in,color=target_label)
+        fig.show()
+
+
+
