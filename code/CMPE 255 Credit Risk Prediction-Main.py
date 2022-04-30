@@ -135,20 +135,22 @@ df_impute
 # 
 # Author : Mahesh Chandra Mareedu
 
-# ####  Bar charts
+# ####  Author : Shanmuk
+# 
+# Bar charts
 #        
 # - On counts of categorical columns
 # - On categorical columns by target label
 # 
-# Author : Shanmuk
+# 
 
-# #### 
+# #### Author - Lokesh
 #     Tree Map
 #     Parallel Categories
 # 
 # Author : Lokesh
 
-# #### 
+# ####  Author - Nikhil
 #     - Box plot
 #     - Violin charts
 # 

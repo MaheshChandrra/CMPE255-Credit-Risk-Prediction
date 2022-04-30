@@ -94,6 +94,8 @@ def visualize_pdf(df_in,col,bool_describe_data):
     
     ##Seaborn plot
     sns.kdeplot(data=df_temp, x=col)
+    graph_file='../paper\images\dist_plot_'+col+'.png'
+    plt.savefig(graph_file)
     plt.show()
     
 def impute_missing_values(df_in,features_with_missing_values):
