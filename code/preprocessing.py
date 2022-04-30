@@ -1,6 +1,10 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.figure_factory as ff
+import numpy as np
+from IPython.display import display
 
 def check_missing_columns(df_in):
     """
@@ -40,9 +44,7 @@ def check_missing_columns(df_in):
     return missing_columns_list
 
 
-import plotly.figure_factory as ff
-import numpy as np
-from IPython.display import display
+
 
 
 def visualize_pdf(df_in,col,bool_describe_data):
@@ -85,11 +87,14 @@ def visualize_pdf(df_in,col,bool_describe_data):
         print("[INFO] Describing data for feature:",col)
         display(df_temp[[col]].describe().T)
     
-    fig = ff.create_distplot(hist_data, label)
-    title='Dist Plot for feature '+ col
-    fig.update_layout(title=title) 
-    fig.show()
+#     fig = ff.create_distplot(hist_data, label)
+#     title='Dist Plot for feature '+ col
+#     fig.update_layout(title=title) 
+#     fig.show()
     
+    ##Seaborn plot
+    sns.kdeplot(data=df_temp, x=col)
+    plt.show()
     
 def impute_missing_values(df_in,features_with_missing_values):
     """
@@ -127,64 +132,5 @@ def impute_missing_values(df_in,features_with_missing_values):
         imputed_value_dict[col]=mean_value
         
     return df_in,imputed_value_dict
-    
-    
-import plotly.figure_factory as ff
-import numpy as np
-from IPython.display import display
-
-
-def visualize_pdf(df_in,col,bool_describe_data):
-    """
-    
-    Author : Mareedu Mahesh Chandra
-    
-    This function takes in a dataframe and visualize data distribution(Probability Density Function)
-        -Some columns have "?" as data,removing them while visualizing
-    
-    Params: 
-    -------------------
-    input: df_in
-           =>Source dataframe
-           
-           col:
-           =>Column/Feature for which distribution visualization is required
-           
-           bool_describe_data:
-           => Boolean flag to describe properties of the feature,True to print.
-    -------------------
-    
-    output: dataframe
-            =>Dataframe with imputed values
-    
-    """
-    
-    ### Taking only feature values which are "not null" and "?"
-    df_temp=df_in[df_in[col]!='?']
-    df_temp=df_temp[~df_temp[col].isna()]
-    
-    df_temp[col]=df_temp[col].astype(float)
-    
-    
-    
-    hist_data=[df_temp[col].values]
-    label=[col]
-    
-    if bool_describe_data:
-        print("[INFO] Describing data for feature:",col)
-        display(df_temp[[col]].describe().T)
-    
-    fig = ff.create_distplot(hist_data, label)
-    title='Dist Plot for feature '+ col
-    fig.update_layout(title=title) 
-    fig.show()
-    
-    
-    
-    
-    
-    
-    
-    
     
     
