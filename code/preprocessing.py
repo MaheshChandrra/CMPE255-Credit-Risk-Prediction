@@ -235,6 +235,51 @@ def get_distplot(df_in,feature_list,target_label,bool_plot_by_target):
             graph_file=IMG_DIR+col+'_dist_plot.png'
         plt.savefig(graph_file)
 
-        
+
+def get_correlation_treemap(df_in):
+    """
+    Author : Lokesh Vaddi
+    
+    This function takes in a dataframe visualizes TreeMap to understand hierarchical correlation among features.
+    
+    Params:
+    -------------------
+    input: df_in
+           =>dataframe
+           
+           
+    -------------------
+    
+    
+    """
+    TreeMap = px.treemap(df_in, path=['person_age','person_income', 'loan_amnt'])
+    
+    TreeMap.show()
+
+
+def get_correlation_parallel(df_in):
+    """
+    Author : Lokesh Vaddi
+    
+    This function takes in a dataframe visualizes parallel to understand correlation between data.
+    
+    Params:
+    -------------------
+    input: df_in
+           =>dataframe
+           
+           
+    -------------------
+    
+    
+    """
+    correlation_parallel = px.parallel_categories(df_in, dimensions=['loan_intent', 'loan_grade'])
+    correlation_parallel.show()
+    
+    correlation_parallel = px.parallel_categories(df_in, dimensions=['loan_intent', 'loan_grade'], color = 'loan_status')
+    correlation_parallel.show()
+
+
+
 
 
