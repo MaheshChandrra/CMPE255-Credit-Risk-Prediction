@@ -139,6 +139,32 @@ def impute_missing_values(df_in,features_with_missing_values):
         
     return df_in,imputed_value_dict
 
+def drop_outliners(df_in):
+    """
+    Author : Lokesh Vaddi
+    
+    This function takes in a dataframe and drops the outliners.
+        -Some columns have emp_length as 123 as data,considering them as Outliners.
+    
+    Params:
+    -------------------
+    input: df_in
+           =>Source dataframe
+           
+    -------------------
+    
+    output: dataframe
+            =>Dataframe with removed outliner values
+                
+    """
+
+    df_in.drop(df_in.loc[df_in['person_emp_length'] == 123].index, inplace=True)
+#     df_in.loc[df_in['person_emp_length'] == 123]
+    df_in.drop(df_in.loc[df_in['person_age'] >= 123].index, inplace=True)
+#     df_in.loc[df_in['person_age'] >= 123].index
+
+
+
 def get_correlation_heatmap(df_in):
     """
     Author : Mareedu Mahesh Chandra
@@ -185,6 +211,50 @@ def get_correlation_pairplot(df_in,target_label=None):
     else:
         fig = px.scatter_matrix(df_in,color=target_label)
         fig.show()
+        
+
+def get_correlation_treemap(df_in):
+    """
+    Author : Lokesh Vaddi
+    
+    This function takes in a dataframe visualizes TreeMap to understand hierarchical correlation among features.
+    
+    Params:
+    -------------------
+    input: df_in
+           =>dataframe
+           
+           
+    -------------------
+    
+    
+    """
+    TreeMap = px.treemap(df_in, path=['person_age','person_income', 'loan_amnt'])
+    
+    TreeMap.show()
+
+
+def get_correlation_parallel(df_in):
+    """
+    Author : Lokesh Vaddi
+    
+    This function takes in a dataframe visualizes TreeMap to understand hierarchical correlation among features.
+    
+    Params:
+    -------------------
+    input: df_in
+           =>dataframe
+           
+           
+    -------------------
+    
+    
+    """
+    correlation_parallel = px.parallel_categories(df_in, dimensions=['loan_intent', 'loan_grade'])
+    correlation_parallel.show()
+    
+    correlation_parallel = px.parallel_categories(df_in, dimensions=['loan_intent', 'loan_grade'], color = 'loan_status')
+    correlation_parallel.show()
 
 
 

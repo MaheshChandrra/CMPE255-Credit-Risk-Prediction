@@ -14,7 +14,7 @@ from util import *
 import properties
 
 
-# In[ ]:
+# In[2]:
 
 
 file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
@@ -24,7 +24,7 @@ file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[3]:
 
 
 df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
@@ -212,16 +212,28 @@ get_correlation_pairplot(df_data)
 # 
 # Author : Lokesh
 
-# ####  Author - Nikhil
-#     - Box plot
-#     - Violin charts
-# 
+# In[ ]:
+
+
+get_correlation_treemap(df_data)
+
+
+# In[ ]:
+
+
+get_correlation_parallel(df_data)
+
 
 # In[ ]:
 
 
 
 
+
+# ####  Author - Nikhil
+#     - Box plot
+#     - Violin charts
+# 
 
 # In[ ]:
 
@@ -266,6 +278,12 @@ get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
 
 
 # ### Rough
+
+# In[ ]:
+
+
+
+
 
 # In[ ]:
 
