@@ -275,11 +275,28 @@ def get_correlation_parallel(df_in):
     """
     correlation_parallel = px.parallel_categories(df_in, dimensions=['loan_intent', 'loan_grade'])
     correlation_parallel.show()
-    
-    correlation_parallel = px.parallel_categories(df_in, dimensions=['loan_intent', 'loan_grade'], color = 'loan_status')
+    correlation_parallel = px.parallel_categories(df_in, dimensions=['loan_intent', 'loan_grade', 'loan_status'])
     correlation_parallel.show()
 
 
 
 
+def get_correlation_between_data(df_in):
+    """
+    Author : Lokesh Vaddi
+    
+    This function takes in a dataframe and returns the correlation between all the columns.
+    
+    Params:
+    -------------------
+    input: df_in
+           =>dataframe
+           
+           
+    -------------------
+    """
+    plt.figure(figsize=(10,8))
+    sns.heatmap(df_in.corr(), annot=True, cmap="YlGnBu")
+    plt.title("Correlations Between Features", size=15)
+    plt.show()
 

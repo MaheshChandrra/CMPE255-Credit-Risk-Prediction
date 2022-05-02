@@ -14,7 +14,7 @@ from util import *
 import properties
 
 
-# In[2]:
+# In[ ]:
 
 
 file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
@@ -24,7 +24,7 @@ file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[3]:
+# In[ ]:
 
 
 df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
@@ -34,7 +34,7 @@ df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[4]:
+# In[ ]:
 
 
 save_file(df_data,properties.DATASET_DIR)
@@ -76,13 +76,13 @@ save_file(df_data,properties.DATASET_DIR)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[5]:
+# In[ ]:
 
 
 missing_columns_list=check_missing_columns(df_data)
 
 
-# In[6]:
+# In[ ]:
 
 
 print("Missing data in columns:",missing_columns_list)
@@ -92,7 +92,7 @@ print("Missing data in columns:",missing_columns_list)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[7]:
+# In[ ]:
 
 
 for col in missing_columns_list:
@@ -103,25 +103,25 @@ for col in missing_columns_list:
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[8]:
+# In[ ]:
 
 
 df_data,imputed_value_dict=impute_missing_values(df_data,missing_columns_list)
 
 
-# In[9]:
+# In[ ]:
 
 
 imputed_value_dict
 
 
-# In[10]:
+# In[ ]:
 
 
 df_impute=pd.DataFrame(imputed_value_dict.items(), columns=['Column', 'Mean Value'])
 
 
-# In[11]:
+# In[ ]:
 
 
 df_impute
@@ -131,13 +131,13 @@ df_impute
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[12]:
+# In[ ]:
 
 
 df_data.columns
 
 
-# In[13]:
+# In[ ]:
 
 
 df_data.columns
@@ -145,7 +145,7 @@ df_data.columns
 
 # ##### Converting datatype object to float for all numerical columns
 
-# In[14]:
+# In[ ]:
 
 
 NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt',
@@ -153,18 +153,23 @@ NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt
 TARGET_LABEL='loan_status'
 
 
-# In[15]:
+# In[ ]:
 
 
 for col in NUMERICAL_COLUMNS:
     df_data[col]=df_data[col].astype(float)
 
 
-# In[17]:
+# In[ ]:
 
 
 TARGET_LABEL='loan_status'
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,True)
+
+
+# In[ ]:
+
+
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
 
 
@@ -211,34 +216,28 @@ get_correlation_pairplot(df_data[['person_age', 'person_income', 'loan_amnt','lo
 # 
 # Author : Lokesh
 
+# In[ ]:
+
+
+get_correlation_treemap(df_data)
+
+
+# In[ ]:
+
+
+get_correlation_parallel(df_data)
+
+
+# In[ ]:
+
+
+get_correlation_between_data(df_data)
+
+
 # ####  Author - Nikhil
 #     - Box plot
 #     - Violin charts
 # 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
 
 # ### Plots to visualize
 # - Distribution plot on numerical data
