@@ -194,7 +194,7 @@ def get_distplot(df_in,feature_list,target_label,bool_plot_by_target):
     """
     Author : Mareedu Mahesh Chandra
     
-    This function takes in a dataframe visualizes dist plots to understand data distribution of a feature.
+    This function takes in a dataframe visualizes dist plots to understand data distribution of a feature data.
     Also saves plots to iamge directory. 
     
     Params:
@@ -203,13 +203,13 @@ def get_distplot(df_in,feature_list,target_label,bool_plot_by_target):
            =>dataframe
            
            feature_list
-           =>List if feature whose distribtuion is to be analyzed
+           =>List of features whose distribtuion is to be analyzed
            
            target_label
            =>Target variable in dataset
            
            bool_plot_by_target
-           => Flag ,if set true,all the distributions are by target variable
+           => Flag ,if set true,all the feature disrtibutions are visualized by target varible
     -------------------
     
     output:
@@ -227,13 +227,13 @@ def get_distplot(df_in,feature_list,target_label,bool_plot_by_target):
         for i, col in enumerate(feature_list):
             sns.histplot(df_in, x=col, hue=target_label, kde=True, stat='density', fill=True,ax=axes[i//n_cols,i%n_cols])
             graph_file=IMG_DIR+col+'_dist_plot_by_'+target_label+'.png'
-            plt.savefig(graph_file)
+        plt.savefig(graph_file)
     else :
         fig, axes = plt.subplots(nrows=n_rows, ncols=n_cols)
         for i, col in enumerate(feature_list):
             sns.kdeplot(df_in[col],ax=axes[i//n_cols,i%n_cols])
             graph_file=IMG_DIR+col+'_dist_plot.png'
-            plt.savefig(graph_file)
+        plt.savefig(graph_file)
 
         
 
