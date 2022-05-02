@@ -345,3 +345,39 @@ def get_barplot_catagorical(df_in):
         count_plot.bar_label(count_plot.containers[0])
         count_plot.bar_label(count_plot.containers[1])
         plt.show()
+        
+def get_box_plot(df_in, x_col, y_col):
+    """
+    Author : Nikhil Kumar Kanisetty
+    
+    This function takes in a dataframe and visualizes box plots
+    
+    Params:
+    ---------------------
+    input: df_in
+           => dataframe
+            
+           
+           => target 
+    """
+    sns.boxplot(x = x_col, y = y_col, data = df_in)
+    plt.show()
+
+    
+def get_violin_plot(df_in, x_col, y_col):
+    """
+    Author : Nikhil Kumar Kanisetty
+
+    This function takes in a dataframe and visualizes violin plots
+
+    Params:
+    ---------------------
+    input: df_in
+           => dataframe
+
+
+           => target 
+    """
+    sns.violinplot(x = x_col, y = y_col, data = df_in)
+    plt.show()
+
