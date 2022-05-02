@@ -154,6 +154,7 @@ def get_correlation_heatmap(df_in):
     
     """
     ax = sns.heatmap(df_in.corr(), cmap="YlGnBu",annot=True)
+    sns.set(rc = {'figure.figsize':(20,20)})
     graph_file=IMG_DIR+'coorelation_heapmatap.png'
     plt.savefig(graph_file)
     plt.show()
@@ -183,8 +184,57 @@ def get_correlation_pairplot(df_in,target_label=None):
         fig = px.scatter_matrix(df_in)
         fig.show()
     else:
-        fig = px.scatter_matrix(df_in,color=target_label)
+        dimensions=df_in.columns.tolist()
+        dimensions.remove(target_label)
+        fig = px.scatter_matrix(df_in,dimensions=dimensions,color=target_label)
         fig.show()
 
+        
+def get_distplot(df_in,feature_list,target_label,bool_plot_by_target):
+    """
+    Author : Mareedu Mahesh Chandra
+    
+    This function takes in a dataframe visualizes dist plots to understand data distribution of a feature.
+    Also saves plots to iamge directory. 
+    
+    Params:
+    -------------------
+    input: df_in
+           =>dataframe
+           
+           feature_list
+           =>List if feature whose distribtuion is to be analyzed
+           
+           target_label
+           =>Target variable in dataset
+           
+           bool_plot_by_target
+           => Flag ,if set true,all the distributions are by target variable
+    -------------------
+    
+    output:
+        =>Dist plot
+    
+    """
+    #feature_list.remove('loan_status')
+    n_rows=4
+    n_cols=2
+
+    if bool_plot_by_target:
+
+        fig, axes = plt.subplots(nrows=n_rows, ncols=n_cols)
+        
+        for i, col in enumerate(feature_list):
+            sns.histplot(df_in, x=col, hue=target_label, kde=True, stat='density', fill=True,ax=axes[i//n_cols,i%n_cols])
+            graph_file=IMG_DIR+col+'_dist_plot_by_'+target_label+'.png'
+            plt.savefig(graph_file)
+    else :
+        fig, axes = plt.subplots(nrows=n_rows, ncols=n_cols)
+        for i, col in enumerate(feature_list):
+            sns.kdeplot(df_in[col],ax=axes[i//n_cols,i%n_cols])
+            graph_file=IMG_DIR+col+'_dist_plot.png'
+            plt.savefig(graph_file)
+
+        
 
 

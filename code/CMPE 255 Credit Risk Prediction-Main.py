@@ -14,7 +14,7 @@ from util import *
 import properties
 
 
-# In[ ]:
+# In[2]:
 
 
 file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
@@ -24,7 +24,7 @@ file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[3]:
 
 
 df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
@@ -34,7 +34,7 @@ df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[4]:
 
 
 save_file(df_data,properties.DATASET_DIR)
@@ -76,13 +76,13 @@ save_file(df_data,properties.DATASET_DIR)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[5]:
 
 
 missing_columns_list=check_missing_columns(df_data)
 
 
-# In[ ]:
+# In[6]:
 
 
 print("Missing data in columns:",missing_columns_list)
@@ -92,7 +92,7 @@ print("Missing data in columns:",missing_columns_list)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[7]:
 
 
 for col in missing_columns_list:
@@ -103,25 +103,25 @@ for col in missing_columns_list:
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[8]:
 
 
 df_data,imputed_value_dict=impute_missing_values(df_data,missing_columns_list)
 
 
-# In[ ]:
+# In[9]:
 
 
 imputed_value_dict
 
 
-# In[ ]:
+# In[10]:
 
 
 df_impute=pd.DataFrame(imputed_value_dict.items(), columns=['Column', 'Mean Value'])
 
 
-# In[ ]:
+# In[11]:
 
 
 df_impute
@@ -131,35 +131,13 @@ df_impute
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[ ]:
-
-
-import plotly.figure_factory as ff
-import numpy as np
-
-# Add histogram data
-x1 = np.random.randn(200) - 2
-x2 = np.random.randn(200)
-x3 = np.random.randn(200) + 2
-x4 = np.random.randn(200) + 4
-
-# Group data together
-hist_data = [x1, x2, x3, x4]
-
-group_labels = ['Group 1', 'Group 2', 'Group 3', 'Group 4']
-
-# Create distplot with custom bin_size
-fig = ff.create_distplot(hist_data, group_labels, bin_size=.2)
-fig.show()
-
-
-# In[ ]:
+# In[12]:
 
 
 df_data.columns
 
 
-# In[ ]:
+# In[13]:
 
 
 df_data.columns
@@ -167,18 +145,27 @@ df_data.columns
 
 # ##### Converting datatype object to float for all numerical columns
 
-# In[ ]:
+# In[14]:
 
 
 NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt',
-       'loan_int_rate', 'loan_status', 'loan_percent_income', 'cb_person_cred_hist_length']
+       'loan_int_rate', 'loan_percent_income', 'cb_person_cred_hist_length']
+TARGET_LABEL='loan_status'
 
 
-# In[ ]:
+# In[15]:
 
 
 for col in NUMERICAL_COLUMNS:
     df_data[col]=df_data[col].astype(float)
+
+
+# In[17]:
+
+
+TARGET_LABEL='loan_status'
+get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,True)
+get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
 
 
 # #### Correlation plot around numerical features
@@ -194,7 +181,19 @@ get_correlation_heatmap(df_data)
 # In[ ]:
 
 
-get_correlation_pairplot(df_data)
+df_data
+
+
+# In[ ]:
+
+
+get_correlation_pairplot(df_data[NUMERICAL_COLUMNS])
+
+
+# In[ ]:
+
+
+get_correlation_pairplot(df_data[['person_age', 'person_income', 'loan_amnt','loan_status']],'loan_status')
 
 
 # ####  Author : Shanmuk
