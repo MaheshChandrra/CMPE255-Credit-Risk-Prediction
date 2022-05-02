@@ -300,3 +300,48 @@ def get_correlation_between_data(df_in):
     plt.title("Correlations Between Features", size=15)
     plt.show()
 
+
+
+def get_barplot(df_in):
+    """
+    Author : Shanmuk 
+    
+    This function takes in a dataframe and returns the barplot.
+    
+    Params:
+    -------------------
+    input: df_in
+           =>dataframe
+           
+           
+    -------------------
+    """
+
+    #df_categorical_col['loan_grade'].value_counts().iplot(kind='bar')
+    df_catagorical_col=df_in.select_dtypes(include=['object'])
+
+    for i in df_catagorical_col:
+        fig = px.bar(df_catagorical_col[i].value_counts())
+        fig.show()
+def get_barplot_catagorical(df_in):
+    """
+    Author : Shanmuk
+    
+    This function takes in a dataframe and returns the barplot with target variable loan status.
+    
+    Params:
+    -------------------
+    input: df_in
+           =>dataframe
+           
+           
+    -------------------
+    """
+
+    df_catagorical_col=df_in.select_dtypes(include=['object'])
+    for i in df_catagorical_col:
+        plt.figure(figsize=(12,5))
+        count_plot=sns.countplot(data=df_catagorical_col, y= df_catagorical_col[i],hue=df_in['loan_status'].astype(int),palette='RdYlBu_r')
+        count_plot.bar_label(count_plot.containers[0])
+        count_plot.bar_label(count_plot.containers[1])
+        plt.show()
