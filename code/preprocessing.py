@@ -98,7 +98,7 @@ def visualize_pdf(df_in,col,bool_describe_data):
     
     ##Seaborn plot
     sns.kdeplot(data=df_temp, x=col)
-    graph_file='dist_plot_'+col+'.png'
+    graph_file=IMG_DIR+'dist_plot_'+col+'.png'
     plt.savefig(graph_file)
     plt.show()
     
@@ -181,13 +181,19 @@ def get_correlation_pairplot(df_in,target_label=None):
 #     plt.savefig(graph_file)
 #     plt.show()
     if target_label==None:
-        fig = px.scatter_matrix(df_in)
-        fig.show()
+        #fig = px.scatter_matrix(df_in)
+        #fig.show()
+        sns.pairplot(df_in)
+        plt.show()
+        
     else:
-        dimensions=df_in.columns.tolist()
-        dimensions.remove(target_label)
-        fig = px.scatter_matrix(df_in,dimensions=dimensions,color=target_label)
-        fig.show()
+        #dimensions=df_in.columns.tolist()
+        #dimensions.remove(target_label)
+        #fig = px.scatter_matrix(df_in,dimensions=dimensions,color=target_label)
+        #fig.show()
+        sns.pairplot(df_in, hue=target_label)
+        plt.show()
+        
 
         
 def get_distplot(df_in,feature_list,target_label,bool_plot_by_target):
@@ -323,11 +329,13 @@ def get_barplot(df_in):
     for i in df_catagorical_col:
         fig = px.bar(df_catagorical_col[i].value_counts())
         fig.show()
+        
+        
 def get_barplot_catagorical(df_in):
     """
     Author : Shanmuk
     
-    This function takes in a dataframe and returns the barplot with target variable loan status.
+    This function takes in a dataframe and displays the barplot with target variable loan status.
     
     Params:
     -------------------

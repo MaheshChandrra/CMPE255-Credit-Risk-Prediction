@@ -9,12 +9,13 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import iplot
 from preprocessing import *
 from util import *
 import properties
 
 
-# In[ ]:
+# In[2]:
 
 
 file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
@@ -24,7 +25,7 @@ file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[3]:
 
 
 df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
@@ -34,7 +35,7 @@ df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[4]:
 
 
 save_file(df_data,properties.DATASET_DIR)
@@ -69,20 +70,19 @@ save_file(df_data,properties.DATASET_DIR)
 # - Validaing the data
 # - Parameter tuning
 # - Saving model
-# - Deployment using flask
 #     
 
 # #### Checking for missing data
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[5]:
 
 
 missing_columns_list=check_missing_columns(df_data)
 
 
-# In[ ]:
+# In[6]:
 
 
 print("Missing data in columns:",missing_columns_list)
@@ -92,7 +92,7 @@ print("Missing data in columns:",missing_columns_list)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[7]:
 
 
 for col in missing_columns_list:
@@ -103,25 +103,25 @@ for col in missing_columns_list:
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[8]:
 
 
 df_data,imputed_value_dict=impute_missing_values(df_data,missing_columns_list)
 
 
-# In[ ]:
+# In[9]:
 
 
 imputed_value_dict
 
 
-# In[ ]:
+# In[10]:
 
 
 df_impute=pd.DataFrame(imputed_value_dict.items(), columns=['Column', 'Mean Value'])
 
 
-# In[ ]:
+# In[11]:
 
 
 df_impute
@@ -131,13 +131,13 @@ df_impute
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[12]:
 
 
 df_data.columns
 
 
-# In[ ]:
+# In[13]:
 
 
 df_data.columns
@@ -145,7 +145,7 @@ df_data.columns
 
 # ##### Converting datatype object to float for all numerical columns
 
-# In[ ]:
+# In[14]:
 
 
 NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt',
@@ -153,21 +153,21 @@ NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt
 TARGET_LABEL='loan_status'
 
 
-# In[ ]:
+# In[15]:
 
 
 for col in NUMERICAL_COLUMNS:
     df_data[col]=df_data[col].astype(float)
 
 
-# In[ ]:
+# In[16]:
 
 
 TARGET_LABEL='loan_status'
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,True)
 
 
-# In[ ]:
+# In[17]:
 
 
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
@@ -177,25 +177,25 @@ get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[18]:
 
 
 get_correlation_heatmap(df_data)
 
 
-# In[ ]:
+# In[19]:
 
 
 df_data
 
 
-# In[ ]:
+# In[20]:
 
 
 get_correlation_pairplot(df_data[NUMERICAL_COLUMNS])
 
 
-# In[ ]:
+# In[21]:
 
 
 get_correlation_pairplot(df_data[['person_age', 'person_income', 'loan_amnt','loan_status']],'loan_status')
@@ -210,9 +210,21 @@ get_correlation_pairplot(df_data[['person_age', 'person_income', 'loan_amnt','lo
 # 
 # 
 
+# In[22]:
+
+
+get_barplot(df_data)
+
+
+# In[23]:
+
+
+get_barplot_catagorical(df_data)
+
+
 # #### Author - Lokesh
-#     Tree Map
-#     Parallel Categories
+# Tree Map
+# Parallel Categories
 # 
 # Author : Lokesh
 
@@ -228,16 +240,26 @@ get_correlation_treemap(df_data)
 get_correlation_parallel(df_data)
 
 
-# In[ ]:
-
-
-get_correlation_between_data(df_data)
-
-
 # ####  Author - Nikhil
 #     - Box plot
 #     - Violin charts
 # 
+
+# In[ ]:
+
+
+for x_col in NUMERICAL_COLUMNS:
+    if x_col is not "loan_status":
+        get_box_plot(df_data, 'loan_status', x_col)
+
+
+# In[ ]:
+
+
+for x_col in NUMERICAL_COLUMNS:
+    if x_col is not "loan_status":
+        get_violin_plot(df_data, 'loan_status', x_col)
+
 
 # ### Plots to visualize
 # - Distribution plot on numerical data
