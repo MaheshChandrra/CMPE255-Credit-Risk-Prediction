@@ -231,11 +231,14 @@ def get_distplot(df_in,feature_list,target_label,bool_plot_by_target):
         fig, axes = plt.subplots(nrows=n_rows, ncols=n_cols)
         
         for i, col in enumerate(feature_list):
+            sns.set(rc={'figure.figsize':(20,20)})
             sns.histplot(df_in, x=col, hue=target_label, kde=True, stat='density', fill=True,ax=axes[i//n_cols,i%n_cols])
             graph_file=IMG_DIR+col+'_dist_plot_by_'+target_label+'.png'
         plt.savefig(graph_file)
     else :
         fig, axes = plt.subplots(nrows=n_rows, ncols=n_cols)
+        sns.set(rc={'figure.figsize':(20,20)})
+
         for i, col in enumerate(feature_list):
             sns.kdeplot(df_in[col],ax=axes[i//n_cols,i%n_cols])
             graph_file=IMG_DIR+col+'_dist_plot.png'
