@@ -8,7 +8,7 @@ from IPython.display import display
 import plotly.express as px
 
 
-IMG_DIR="../paper\images/"
+IMG_DIR="../paper/images/"
 
 def check_missing_columns(df_in):
     """
@@ -354,7 +354,7 @@ def get_barplot_catagorical(df_in):
         count_plot.bar_label(count_plot.containers[1])
         plt.show()
         
-def get_box_plot(df_in, x_col, y_col):
+def get_box_plots(df_in, x_col, y_cols):
     """
     Author : Nikhil Kumar Kanisetty
     
@@ -368,11 +368,14 @@ def get_box_plot(df_in, x_col, y_col):
            
            => target 
     """
-    sns.boxplot(x = x_col, y = y_col, data = df_in)
-    plt.show()
+    for col in y_cols:
+        if col is not "loan status":
+            plt.figure(figsize=(12,5))
+            sns.boxplot(x = x_col, y = col, data = df_in)
+            plt.show()
 
     
-def get_violin_plot(df_in, x_col, y_col):
+def get_violin_plots(df_in, x_col, y_cols):
     """
     Author : Nikhil Kumar Kanisetty
 
@@ -386,6 +389,9 @@ def get_violin_plot(df_in, x_col, y_col):
 
            => target 
     """
-    sns.violinplot(x = x_col, y = y_col, data = df_in)
-    plt.show()
+    for col in y_cols:
+        if col is not "loan status":
+            plt.figure(figsize=(12,5))
+            sns.violinplot(x = x_col, y = col, data = df_in)
+            plt.show()
 

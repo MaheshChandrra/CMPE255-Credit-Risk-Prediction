@@ -99,29 +99,72 @@ for col in missing_columns_list:
     visualize_pdf(df_data,col,True)
 
 
+# In[8]:
+
+
+import os
+os.listdir('../paper/images')
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
 # #### Imputing Missing Values
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[8]:
+# In[9]:
 
 
 df_data,imputed_value_dict=impute_missing_values(df_data,missing_columns_list)
 
 
-# In[9]:
+# In[10]:
 
 
 imputed_value_dict
 
 
-# In[10]:
+# In[11]:
 
 
 df_impute=pd.DataFrame(imputed_value_dict.items(), columns=['Column', 'Mean Value'])
 
 
-# In[11]:
+# In[12]:
 
 
 df_impute
@@ -131,13 +174,13 @@ df_impute
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[12]:
+# In[13]:
 
 
 df_data.columns
 
 
-# In[13]:
+# In[14]:
 
 
 df_data.columns
@@ -145,7 +188,7 @@ df_data.columns
 
 # ##### Converting datatype object to float for all numerical columns
 
-# In[14]:
+# In[15]:
 
 
 NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt',
@@ -153,21 +196,21 @@ NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt
 TARGET_LABEL='loan_status'
 
 
-# In[15]:
+# In[16]:
 
 
 for col in NUMERICAL_COLUMNS:
     df_data[col]=df_data[col].astype(float)
 
 
-# In[16]:
+# In[17]:
 
 
 TARGET_LABEL='loan_status'
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,True)
 
 
-# In[17]:
+# In[18]:
 
 
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
@@ -177,25 +220,25 @@ get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[18]:
+# In[19]:
 
 
 get_correlation_heatmap(df_data)
 
 
-# In[19]:
+# In[20]:
 
 
 df_data
 
 
-# In[20]:
+# In[21]:
 
 
 get_correlation_pairplot(df_data[NUMERICAL_COLUMNS])
 
 
-# In[21]:
+# In[22]:
 
 
 get_correlation_pairplot(df_data[['person_age', 'person_income', 'loan_amnt','loan_status']],'loan_status')
@@ -210,13 +253,13 @@ get_correlation_pairplot(df_data[['person_age', 'person_income', 'loan_amnt','lo
 # 
 # 
 
-# In[22]:
+# In[23]:
 
 
 get_barplot(df_data)
 
 
-# In[23]:
+# In[24]:
 
 
 get_barplot_catagorical(df_data)
@@ -228,13 +271,13 @@ get_barplot_catagorical(df_data)
 # 
 # Author : Lokesh
 
-# In[ ]:
+# In[25]:
 
 
 get_correlation_treemap(df_data)
 
 
-# In[ ]:
+# In[26]:
 
 
 get_correlation_parallel(df_data)
@@ -245,20 +288,16 @@ get_correlation_parallel(df_data)
 #     - Violin charts
 # 
 
-# In[ ]:
+# In[27]:
 
 
-for x_col in NUMERICAL_COLUMNS:
-    if x_col is not "loan_status":
-        get_box_plot(df_data, 'loan_status', x_col)
+get_box_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 
 
-# In[ ]:
+# In[28]:
 
 
-for x_col in NUMERICAL_COLUMNS:
-    if x_col is not "loan_status":
-        get_violin_plot(df_data, 'loan_status', x_col)
+get_violin_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 
 
 # ### Plots to visualize
@@ -279,7 +318,7 @@ for x_col in NUMERICAL_COLUMNS:
 # 
 # 
 
-# In[ ]:
+# In[29]:
 
 
 get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
