@@ -369,7 +369,7 @@ def get_box_plots(df_in, x_col, y_cols):
            => target 
     """
     for col in y_cols:
-        if col is not "loan status":
+        if col != "loan status":
             plt.figure(figsize=(12,5))
             sns.boxplot(x = x_col, y = col, data = df_in)
             plt.show()
@@ -390,7 +390,7 @@ def get_violin_plots(df_in, x_col, y_cols):
            => target 
     """
     for col in y_cols:
-        if col is not "loan status":
+        if col != "loan status":
             plt.figure(figsize=(12,5))
             sns.violinplot(x = x_col, y = col, data = df_in)
             plt.show()

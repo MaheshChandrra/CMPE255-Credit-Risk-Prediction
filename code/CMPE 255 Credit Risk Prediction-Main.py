@@ -277,7 +277,7 @@ get_barplot_catagorical(df_data)
 get_correlation_treemap(df_data)
 
 
-# In[26]:
+# In[ ]:
 
 
 get_correlation_parallel(df_data)
@@ -288,13 +288,13 @@ get_correlation_parallel(df_data)
 #     - Violin charts
 # 
 
-# In[27]:
+# In[ ]:
 
 
 get_box_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 
 
-# In[28]:
+# In[ ]:
 
 
 get_violin_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
@@ -318,7 +318,7 @@ get_violin_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 # 
 # 
 
-# In[29]:
+# In[ ]:
 
 
 get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
