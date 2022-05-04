@@ -398,9 +398,9 @@ def get_box_plots(df_in, x_col, y_cols):
         if col != "loan status":
             plt.figure(figsize=(12,5))
             sns.boxplot(x = x_col, y = col, data = df_in)
-            plt.show()
             graph_file=IMG_DIR+str(count)+'_box_plot.png'
             plt.savefig(graph_file)
+            plt.show()
             count = count+1
 
 
@@ -424,8 +424,8 @@ def get_violin_plots(df_in, x_col, y_cols):
         if col != "loan status":
             plt.figure(figsize=(12,5))
             sns.violinplot(x = x_col, y = col, data = df_in)
-            plt.show()
             graph_file=IMG_DIR+str(count)+'_violin_plot_.png'
             plt.savefig(graph_file)
+            plt.show()
             count = count+1
    

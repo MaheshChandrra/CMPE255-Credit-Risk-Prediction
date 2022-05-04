@@ -293,13 +293,13 @@ get_barplot_catagorical(df_data)
 # 
 # Author : Lokesh
 
-# In[32]:
+# In[ ]:
 
 
 get_correlation_treemap(df_data)
 
 
-# In[33]:
+# In[ ]:
 
 
 get_correlation_parallel(df_data)
@@ -310,13 +310,13 @@ get_correlation_parallel(df_data)
 #     - Violin charts
 # 
 
-# In[34]:
+# In[ ]:
 
 
 get_box_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 
 
-# In[35]:
+# In[ ]:
 
 
 get_violin_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
@@ -326,7 +326,7 @@ get_violin_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[37]:
+# In[ ]:
 
 
 from sklearn.preprocessing import MinMaxScaler
@@ -335,25 +335,11 @@ scaler = MinMaxScaler()
 df_data[NUMERICAL_COLUMNS]=scaler.fit_transform(df_data[NUMERICAL_COLUMNS])
 
 
-# In[38]:
+# In[ ]:
 
 
 df_data
 
-
-# ### Plots to visualize
-# - Distribution plot on numerical data
-# - Correlation plot around numerical features
-# - Bar charts
-#         - On counts of categorical columns
-#         - On categorical columns by target label
-# - Tree Map
-# - Parallel Categories
-# - Box plot
-# - Violin charts
-#         
-#     
-#     
 
 # #### Convert notebook to app.py
 # 
@@ -372,3 +358,17 @@ get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
 
 df_data['person_age'].astype(int).max()
 
+
+# ### Plots to visualize
+# - Distribution plot on numerical data
+# - Correlation plot around numerical features
+# - Bar charts
+#         - On counts of categorical columns
+#         - On categorical columns by target label
+# - Tree Map
+# - Parallel Categories
+# - Box plot
+# - Violin charts
+#         
+#     
+#     
