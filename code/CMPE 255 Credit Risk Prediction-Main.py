@@ -25,7 +25,7 @@ file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[3]:
+# In[10]:
 
 
 df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
@@ -35,7 +35,7 @@ df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[4]:
+# In[11]:
 
 
 save_file(df_data,properties.DATASET_DIR)
@@ -74,7 +74,7 @@ save_file(df_data,properties.DATASET_DIR)
 
 # #### Dropping Duplicate Records
 
-# In[44]:
+# In[12]:
 
 
 print("Length of data:",len(df_data))
@@ -86,13 +86,13 @@ print("Length of data  after dropping duplicates:",len(df_data.drop_duplicates()
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[5]:
+# In[13]:
 
 
 missing_columns_list=check_missing_columns(df_data)
 
 
-# In[6]:
+# In[14]:
 
 
 print("Missing data in columns:",missing_columns_list)
@@ -102,7 +102,7 @@ print("Missing data in columns:",missing_columns_list)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[7]:
+# In[15]:
 
 
 for col in missing_columns_list:
@@ -113,37 +113,37 @@ for col in missing_columns_list:
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[8]:
+# In[16]:
 
 
 df_data,imputed_value_dict=impute_missing_values(df_data,missing_columns_list)
 
 
-# In[9]:
+# In[17]:
 
 
 imputed_value_dict
 
 
-# In[10]:
+# In[18]:
 
 
 df_impute=pd.DataFrame(imputed_value_dict.items(), columns=['Column', 'Mean Value'])
 
 
-# In[11]:
+# In[19]:
 
 
 df_impute
 
 
-# In[12]:
+# In[20]:
 
 
 df_data.columns
 
 
-# In[13]:
+# In[21]:
 
 
 df_data.columns
@@ -151,7 +151,7 @@ df_data.columns
 
 # #### Converting datatype object to float for all numerical columns
 
-# In[14]:
+# In[22]:
 
 
 NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt',
@@ -159,7 +159,7 @@ NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt
 TARGET_LABEL='loan_status'
 
 
-# In[15]:
+# In[23]:
 
 
 for col in NUMERICAL_COLUMNS:
@@ -173,13 +173,13 @@ for col in NUMERICAL_COLUMNS:
 # Considering the average persons age is around 80,discarding all the values where age is greater than 80.
 # 
 
-# In[16]:
+# In[24]:
 
 
 df_data[df_data['person_age']>80]
 
 
-# In[17]:
+# In[25]:
 
 
 df_data=df_data[df_data['person_age']<80].reset_index(drop=True)
@@ -189,19 +189,19 @@ df_data=df_data[df_data['person_age']<80].reset_index(drop=True)
 # 
 # Considering the the retirement period is 60 years,max employement for a person would be 40-45 yrs if he/she starts working around 15-20.Discarding where employment period is greater than 41.
 
-# In[18]:
+# In[26]:
 
 
 df_data[df_data['person_emp_length']>41]
 
 
-# In[19]:
+# In[27]:
 
 
 df_data=df_data[df_data['person_emp_length']<41].reset_index(drop=True)
 
 
-# In[20]:
+# In[28]:
 
 
 df_data
@@ -211,14 +211,14 @@ df_data
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[45]:
+# In[29]:
 
 
 TARGET_LABEL='loan_status'
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,True)
 
 
-# In[22]:
+# In[30]:
 
 
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
@@ -230,37 +230,37 @@ get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[23]:
+# In[ ]:
 
 
 get_correlation_heatmap(df_data)
 
 
-# In[24]:
+# In[ ]:
 
 
 df_data
 
 
-# In[25]:
+# In[ ]:
 
 
 get_correlation_pairplot(df_data[NUMERICAL_COLUMNS])
 
 
-# In[26]:
+# In[ ]:
 
 
 get_correlation_pairplot(df_data[['person_age', 'person_income', 'loan_amnt','loan_status']],'loan_status')
 
 
-# In[27]:
+# In[ ]:
 
 
 NUMERICAL_COLUMNS.remove('cb_person_cred_hist_length')
 
 
-# In[28]:
+# In[ ]:
 
 
 NUMERICAL_COLUMNS
@@ -275,7 +275,7 @@ NUMERICAL_COLUMNS
 # 
 # 
 
-# In[29]:
+# In[ ]:
 
 
 get_barplot(df_data)
@@ -310,7 +310,7 @@ get_correlation_parallel(df_data)
 #     - Violin charts
 # 
 
-# In[33]:
+# In[9]:
 
 
 get_box_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
