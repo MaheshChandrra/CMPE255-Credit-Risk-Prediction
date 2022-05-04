@@ -1,5 +1,5 @@
 ---
-title: Credit Rist Prediction
+title: Credit Risk Prediction
 date: "April 2022"
 author: Team 6, San José State University
 
@@ -108,6 +108,35 @@ From the dataset, we can make a Parallel coordinates plot is used to analyze mul
 
 From the below Parallel plot we can observe how the loan grade is divided for the different Loan intents for the different situations.
 From Parallel plot 2 we can see the Loan status for the different loan grades for different loan intents.
+
+|Person_home_ownership|
+:-------------------------:
+![Person_house_ownership](./images/1_bar_plot_catagorical.png)
+
+The categorical variable that has the most correlation with target label alone status is person_home_ownership.
+The graph containing person_home_ownership with target variable loan_status shows the frequencies of types of house_ownerships .We can notice that people who live in rented places are more likely to default when compared to others, who are least likely to default.it means those who are paying rent are less likely to repay the debt amount.
+|loan_intent|
+:-------------------------:
+![loan_intent](./images/2_bar_plot_catagorical.png))
+
+Here, when we compare on basis of loan_intent with target variable loan_status from the plot, we can see that when loan is intended for medical reasons and debt consolidation it is more likely to be default and risky for the lender. The same way when the loan intent is venture or home improvement, it is least likely to default .
+|loan_grade|
+:-------------------------:
+![loan_grade](./images/3_bar_plot_catagorical.png)
+
+Here the above graph shows loan_grade with target label loan status(loan_status) where we consider 0 as non-default and 1 as default .It helps us to measure the risk grade, which means the higher the risk, the less likely the loan is to be approved and vice versa.
+
+|loan_status|
+:-------------------------:
+![loan_status](./images/4_bar_plot_catagorical.png)
+
+From the above graph loan status we can say that the dataset is biased as the cases where the frequency of loans being rejected are far less than the frequency of loans that are being approved.
+
+|cb_person_default_on_file|
+:---------------------------:
+![cb_person_default_on_file](./images/5_bar_plot_catagorical.png)
+
+Here we compare loan status of the people who are having history of taking the loan and not being able to pay it vs able to pay it.People with no history of default are more likely to have their loan approved when compared to people having a history of default .
 
 # Comparisons
 
