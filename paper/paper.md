@@ -158,22 +158,19 @@ Box plots are one of the best methods to check the outliers in the numerical col
 From the box plot between the loan_status and person_age, we can see that most of the people are between the age of 20 to 35. There are some outliers that do not make sense. There are some data points that suggest that a person of age 140 has loan_status ‘not default’ which is humanly impossible to live that long. Since only a few data points are above the age of 80 we can consider this to be the maximum age and remove those data above age 80.
 
 |Person Age|
-:-------------------------:
-![Person Age](./images/1_box_plot.png)
+|:-------------------------:|
+|<img src="./images/1_box_plot.png" width="432" height="180" />|
+
 
 - Person Income:
 From the box plot, we can observe that only one data point is far away from the dataset, while most of the data is between 0 and 1 million. Even though it is not impossible to earn 6 million a year since our dataset has only a few data points which are lying above the 2 million range we can consider these as the outliers and remove them from our dataset for better predictions.
 
-|Person Income|
-:-------------------------:
-![Person Income](./images/2_box_plot.png)
+|Person Income|Person Employee Length|
+|:-------------------------:|:-------------------------:|
+|<img src="./images/2_box_plot.png" width="432" height="180" />|<img src="./images/3_box_plot.png" width="432" height="180" />|
 
 - Person Employee Length:
 This feature looks almost similar to the person_age feature in the plot. This is because age is similar to the employee length as most people start their career in the mid-’20s. Even in this plot, we can see that some of the points lie far away from the remaining data points which are clustered between 0 and 10. The points which are at 120 can be discarded as they are outliers and do not make sense and the data points till 40 can be considered even if some of them are outliers.
-
-|Person Employee Length|
-:-------------------------:
-![Person Employee Length](./images/3_box_plot.png)
 
 The remaining features 'loan_amnt', 'loan_int_rate', 'loan_percent_income', 'cb_person_cred_hist_length’ are plotted and checked for outliers but these outliers are not removed but considered because these features have the data points which can be possible and cannot be removed.
 
@@ -186,8 +183,8 @@ From the violin plot between person age and loan_status, most of the data is aro
 Except for the plot between the ‘loan_percent_income’ and ‘loan_status’, all the plots have a similar kind of distribution for both the classes. Only in this plot, we can see that if the loan has not defaulted the data is mostly around low loan_percent_income(0 to 0.2) and if the loan has defaulted the data is mostly around a loan_percent_income between 0.2 to 0.4.
 
 |Loan Percent Income|
-:-------------------------:
-![Loan Percent Income](./images/4_violin_plot_.png)
+|:-------------------------:|
+|<img src="./images/4_violin_plot_.png" width="432" height="180" />|
 
 # Comparisons
 
