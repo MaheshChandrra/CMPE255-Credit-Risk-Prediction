@@ -119,6 +119,8 @@ From Parallel plot 2 we can see the Loan status for the different loan grades fo
 
 ![Parallel Plot 2](./images/parallelplot2.png)
 
+**Analysis of data using Bar Plots:**
+
 |Person_home_ownership|
 :-------------------------:
 ![Person_house_ownership](./images/1_bar_plot_catagorical.png)
@@ -127,7 +129,7 @@ The categorical variable that has the most correlation with target label alone s
 The graph containing person_home_ownership with target variable loan_status shows the frequencies of types of house_ownerships .We can notice that people who live in rented places are more likely to default when compared to others, who are least likely to default.it means those who are paying rent are less likely to repay the debt amount.
 |loan_intent|
 :-------------------------:
-![loan_intent](./images/2_bar_plot_catagorical.png))
+![loan_intent](./images/2_bar_plot_catagorical.png)
 
 Here, when we compare on basis of loan_intent with target variable loan_status from the plot, we can see that when loan is intended for medical reasons and debt consolidation it is more likely to be default and risky for the lender. The same way when the loan intent is venture or home improvement, it is least likely to default .
 |loan_grade|
