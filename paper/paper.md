@@ -81,17 +81,24 @@ The correlation is positive as we can see from the below pair plot and heat map.
 
 From the Dataset we can make a treemap that allows us to represent a hierarchically-ordered (tree-structured) set of dataset
 
+
+|Treemap-1|
+:-------------------------:
 ![Treemap1](./images/treemap1.png)
 
 - From the above Treemap-1 we can observe, what is the loan amount that different age groups of people with different income ranges are requesting.
 
 - we can observe that people with age 22-28 have more loan applications than others.
 
+|Treemap-2|
+:-------------------------:
 ![Treemap2](./images/treemap2.png)
 
 - Then if we observe the intent of the loan for different ages from TreeMap-2
   we can see that most of the loan applications are for Education then followed by Medical, Venture, and personal.
 
+|Treemap-3|
+:-------------------------:
 ![Treemap3](./images/treemap3.png)
 
 - Then if we observe the Treemap-3 we can see get the percentage of loan defaulters in different loan intent category
