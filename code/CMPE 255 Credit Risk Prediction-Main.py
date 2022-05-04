@@ -72,6 +72,16 @@ save_file(df_data,properties.DATASET_DIR)
 # - Saving model
 #     
 
+# #### Dropping Duplicate Records
+
+# In[44]:
+
+
+print("Length of data:",len(df_data))
+df_data=df_data.drop_duplicates().reset_index(drop=True)
+print("Length of data  after dropping duplicates:",len(df_data.drop_duplicates()))
+
+
 # #### Checking for missing data
 # 
 # Author: Mahesh Chandra Mareedu
@@ -163,7 +173,7 @@ for col in NUMERICAL_COLUMNS:
 # Considering the average persons age is around 80,discarding all the values where age is greater than 80.
 # 
 
-# In[39]:
+# In[16]:
 
 
 df_data[df_data['person_age']>80]
@@ -179,19 +189,19 @@ df_data=df_data[df_data['person_age']<80].reset_index(drop=True)
 # 
 # Considering the the retirement period is 60 years,max employement for a person would be 40-45 yrs if he/she starts working around 15-20.Discarding where employment period is greater than 41.
 
-# In[41]:
+# In[18]:
 
 
 df_data[df_data['person_emp_length']>41]
 
 
-# In[42]:
+# In[19]:
 
 
 df_data=df_data[df_data['person_emp_length']<41].reset_index(drop=True)
 
 
-# In[43]:
+# In[20]:
 
 
 df_data
@@ -201,14 +211,14 @@ df_data
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[33]:
+# In[45]:
 
 
 TARGET_LABEL='loan_status'
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,True)
 
 
-# In[20]:
+# In[22]:
 
 
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
@@ -220,37 +230,37 @@ get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[21]:
+# In[23]:
 
 
 get_correlation_heatmap(df_data)
 
 
-# In[22]:
+# In[24]:
 
 
 df_data
 
 
-# In[23]:
+# In[25]:
 
 
 get_correlation_pairplot(df_data[NUMERICAL_COLUMNS])
 
 
-# In[24]:
+# In[26]:
 
 
 get_correlation_pairplot(df_data[['person_age', 'person_income', 'loan_amnt','loan_status']],'loan_status')
 
 
-# In[44]:
+# In[27]:
 
 
 NUMERICAL_COLUMNS.remove('cb_person_cred_hist_length')
 
 
-# In[45]:
+# In[28]:
 
 
 NUMERICAL_COLUMNS
@@ -265,13 +275,13 @@ NUMERICAL_COLUMNS
 # 
 # 
 
-# In[25]:
+# In[29]:
 
 
 get_barplot(df_data)
 
 
-# In[26]:
+# In[30]:
 
 
 get_barplot_catagorical(df_data)
@@ -283,13 +293,13 @@ get_barplot_catagorical(df_data)
 # 
 # Author : Lokesh
 
-# In[27]:
+# In[31]:
 
 
 get_correlation_treemap(df_data)
 
 
-# In[28]:
+# In[32]:
 
 
 get_correlation_parallel(df_data)
@@ -300,13 +310,13 @@ get_correlation_parallel(df_data)
 #     - Violin charts
 # 
 
-# In[29]:
+# In[33]:
 
 
 get_box_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 
 
-# In[30]:
+# In[34]:
 
 
 get_violin_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
@@ -316,7 +326,7 @@ get_violin_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[49]:
+# In[35]:
 
 
 from sklearn.preprocessing import MinMaxScaler
@@ -325,7 +335,7 @@ scaler = MinMaxScaler()
 df_data[NUMERICAL_COLUMNS]=scaler.fit_transform(df_data[NUMERICAL_COLUMNS])
 
 
-# In[50]:
+# In[36]:
 
 
 df_data
@@ -349,7 +359,7 @@ df_data
 # 
 # 
 
-# In[31]:
+# In[37]:
 
 
 get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
@@ -357,7 +367,7 @@ get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
 
 # ### Rough
 
-# In[32]:
+# In[38]:
 
 
 df_data['person_age'].astype(int).max()
