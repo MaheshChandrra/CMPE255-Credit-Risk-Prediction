@@ -184,7 +184,7 @@ Except for the plot between the ‘loan_percent_income’ and ‘loan_status’,
 
 |Loan Percent Income|
 |:-------------------------:|
-|<img src="./images/4_violin_plot_.png" width="432" height="180" />|
+|<img src="./images/6_violin_plot_.png" width="432" height="180" />|
 
 # Comparisons
 
