@@ -13,9 +13,17 @@ import iplot
 from preprocessing import *
 from util import *
 import properties
+import app_models
 
 
 # In[2]:
+
+
+import warnings
+warnings.filterwarnings('ignore')
+
+
+# In[3]:
 
 
 file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
@@ -25,7 +33,7 @@ file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[3]:
+# In[4]:
 
 
 df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
@@ -35,7 +43,7 @@ df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[4]:
+# In[5]:
 
 
 save_file(df_data,properties.DATASET_DIR)
@@ -74,7 +82,7 @@ save_file(df_data,properties.DATASET_DIR)
 
 # #### Dropping Duplicate Records
 
-# In[5]:
+# In[6]:
 
 
 print("Length of data:",len(df_data))
@@ -86,13 +94,13 @@ print("Length of data  after dropping duplicates:",len(df_data.drop_duplicates()
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[6]:
+# In[7]:
 
 
 missing_columns_list=check_missing_columns(df_data)
 
 
-# In[7]:
+# In[8]:
 
 
 print("Missing data in columns:",missing_columns_list)
@@ -102,7 +110,7 @@ print("Missing data in columns:",missing_columns_list)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[8]:
+# In[9]:
 
 
 for col in missing_columns_list:
@@ -113,34 +121,28 @@ for col in missing_columns_list:
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[9]:
+# In[10]:
 
 
 df_data,imputed_value_dict=impute_missing_values(df_data,missing_columns_list)
 
 
-# In[10]:
+# In[11]:
 
 
 imputed_value_dict
 
 
-# In[11]:
+# In[12]:
 
 
 df_impute=pd.DataFrame(imputed_value_dict.items(), columns=['Column', 'Mean Value'])
 
 
-# In[12]:
-
-
-df_impute
-
-
 # In[13]:
 
 
-df_data.columns
+df_impute
 
 
 # In[14]:
@@ -149,9 +151,15 @@ df_data.columns
 df_data.columns
 
 
+# In[15]:
+
+
+df_data.columns
+
+
 # #### Converting datatype object to float for all numerical columns
 
-# In[15]:
+# In[16]:
 
 
 NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt',
@@ -159,7 +167,7 @@ NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt
 TARGET_LABEL='loan_status'
 
 
-# In[16]:
+# In[17]:
 
 
 for col in NUMERICAL_COLUMNS:
@@ -171,13 +179,13 @@ for col in NUMERICAL_COLUMNS:
 #     - Violin charts
 # 
 
-# In[17]:
+# In[18]:
 
 
 get_box_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 
 
-# In[18]:
+# In[19]:
 
 
 get_violin_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
@@ -190,13 +198,13 @@ get_violin_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 # Considering the average persons age is around 80,discarding all the values where age is greater than 80.
 # 
 
-# In[19]:
+# In[20]:
 
 
 df_data[df_data['person_age']>80]
 
 
-# In[20]:
+# In[21]:
 
 
 df_data=df_data[df_data['person_age']<80].reset_index(drop=True)
@@ -206,19 +214,19 @@ df_data=df_data[df_data['person_age']<80].reset_index(drop=True)
 # 
 # Considering the the retirement period is 60 years,max employement for a person would be 40-45 yrs if he/she starts working around 15-20.Discarding where employment period is greater than 41.
 
-# In[21]:
+# In[22]:
 
 
 df_data[df_data['person_emp_length']>41]
 
 
-# In[22]:
+# In[23]:
 
 
 df_data=df_data[df_data['person_emp_length']<41].reset_index(drop=True)
 
 
-# In[23]:
+# In[24]:
 
 
 df_data
@@ -228,14 +236,14 @@ df_data
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[24]:
+# In[25]:
 
 
 TARGET_LABEL='loan_status'
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,True)
 
 
-# In[25]:
+# In[26]:
 
 
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
@@ -247,37 +255,37 @@ get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[26]:
+# In[27]:
 
 
 get_correlation_heatmap(df_data)
 
 
-# In[27]:
+# In[28]:
 
 
 df_data
 
 
-# In[28]:
+# In[29]:
 
 
 get_correlation_pairplot(df_data[NUMERICAL_COLUMNS])
 
 
-# In[29]:
+# In[30]:
 
 
 get_correlation_pairplot(df_data[['person_age', 'person_income', 'loan_amnt','loan_status']],'loan_status')
 
 
-# In[30]:
+# In[31]:
 
 
 NUMERICAL_COLUMNS.remove('cb_person_cred_hist_length')
 
 
-# In[31]:
+# In[32]:
 
 
 NUMERICAL_COLUMNS
@@ -292,13 +300,13 @@ NUMERICAL_COLUMNS
 # 
 # 
 
-# In[32]:
+# In[33]:
 
 
 get_barplot(df_data)
 
 
-# In[33]:
+# In[34]:
 
 
 get_barplot_catagorical(df_data)
@@ -310,23 +318,23 @@ get_barplot_catagorical(df_data)
 # 
 # Author : Lokesh
 
-# In[34]:
-
-
-get_correlation_treemap(df_data)
-
-
 # In[35]:
 
 
-get_correlation_parallel(df_data)
+# get_correlation_treemap(df_data)
+
+
+# In[36]:
+
+
+# get_correlation_parallel(df_data)
 
 
 # #### Normalizing the data
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[36]:
+# In[37]:
 
 
 from sklearn.preprocessing import MinMaxScaler
@@ -335,17 +343,48 @@ scaler = MinMaxScaler()
 df_data[NUMERICAL_COLUMNS]=scaler.fit_transform(df_data[NUMERICAL_COLUMNS])
 
 
-# In[37]:
+# In[38]:
 
 
 df_data
 
 
-# #### Convert notebook to app.py
+# ### Model Building
+
+# #### XGBoost
+# 
+# Author: Mareedu Mahesh Chandra
+# 
+# This funtion performs:
+#         
+#         1.One hot encoding
+#         2.Train test split
+#         3.Upsampling
+#         4.Training XGBoost
+#         5.Testing model
+
+# In[39]:
+
+
+import warnings
+warnings.filterwarnings('ignore')
+
+
+# In[40]:
+
+
+import app_models
+df_in=df_data.copy()
+CATEGORICAL_COLUMNS=["person_home_ownership","loan_intent","loan_grade","cb_person_default_on_file"]
+target_column="loan_status"
+app_models.apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS)
+
+
+# ### Convert notebook to app.py
 # 
 # 
 
-# In[38]:
+# In[41]:
 
 
 get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
@@ -353,22 +392,8 @@ get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
 
 # ### Rough
 
-# In[39]:
+# In[42]:
 
 
 df_data['person_age'].astype(int).max()
 
-
-# ### Plots to visualize
-# - Distribution plot on numerical data
-# - Correlation plot around numerical features
-# - Bar charts
-#         - On counts of categorical columns
-#         - On categorical columns by target label
-# - Tree Map
-# - Parallel Categories
-# - Box plot
-# - Violin charts
-#         
-#     
-#     
