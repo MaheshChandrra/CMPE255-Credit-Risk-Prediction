@@ -82,20 +82,24 @@ The correlation is positive as we can see from the below pair plot and heat map.
 From the Dataset we can make a treemap that allows us to represent a hierarchically-ordered (tree-structured) set of dataset
 
 
+
 |Treemap-1|
 :-------------------------:
 ![Treemap1](./images/treemap1.png)
 
-- From the above Treemap-1 we can observe, what is the loan amount that different age groups of people with different income ranges are requesting.
-
-- we can observe that people with age 22-28 have more loan applications than others.
+- We made Treemap for Age->Person Income->Loan amount (TreeMap1)
+- From the above TreeMap-1 we can observe, what is the loan amount that different age groups of people with different income ranges are requesting.
+- As you can observe from the above TreeMap shows the different ages when you go into those different ages groups it shows their Income and If we filter with different income's bracket we can see their requested loan amount for different Income bracket for that selected age group.
+- so from TreeMap -1 we can interpret that people with age 22-28 have more loan applications than others.
+- for interactive visualization [Click Here](./images/treemap1.html)
 
 |Treemap-2|
 :-------------------------:
 ![Treemap2](./images/treemap2.png)
 
 - Then if we observe the intent of the loan for different ages from TreeMap-2
-  we can see that most of the loan applications are for Education then followed by Medical, Venture, and personal.
+- we can see that most of the loan applications are for Education then followed by Medical, Venture, and personal.
+- for interactive visualization [Click Here](./images/treemap2.html)
 
 |Treemap-3|
 :-------------------------:
@@ -109,15 +113,15 @@ From the Dataset we can make a treemap that allows us to represent a hierarchica
   4. Personal Loans have 17.3 percent, loan defaulters.
   5. Debt consolidation Loans have 18 percent, loan defaulters.
   6. Home improvement Loans have 19.3 percent, loan defaulters.
+- for interactive visualization [Click Here](./images/treemap3.html)
+
 
 From the dataset, we can make a Parallel coordinates plot is used to analyze multivariate data
 
 ![Parallel Plot 1](./images/parallelplot1.png)
 
-From the below Parallel plot we can observe how the loan grade is divided for the different Loan intents for the different situations.
-From Parallel plot 2 we can see the Loan status for the different loan grades for different loan intents.
-
-![Parallel Plot 2](./images/parallelplot2.png)
+From the above Parallel plot we can observe how the loan grade is divided for the different Loan intents for the different situations.
+- for interactive visualization [Click Here](./images/correlation_parallel.html)
 
 **Analysis of data using Bar Plots:**
 
