@@ -21,6 +21,7 @@ from sklearn.metrics import cohen_kappa_score
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import confusion_matrix
 
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.feature_selection import SelectFromModel
@@ -286,6 +287,59 @@ def apply_RFC(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     rf.fit(X_train_upsampled, y_train_upsampled)
     
     show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf)
+    
+
+    
+    
+
+def apply_dt(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
+    
+    """
+    
+    Author : Lokesh Vaddi
+
+    This funtion performs:
+        
+        1.One hot encoding
+        2.Train test split
+        3.Upsampling
+        4.Training Decision Tree Classifier
+        5.Testing model
+        
+    Params:
+    -----------------
+    
+    df_in
+    => Input dataframe
+    
+    target_column
+    =>target column in the dataset
+    
+    CATEGORICAL_COLUMNS
+    => List of categorical columns
+    
+    NUMERICAL_COLUMNS
+    => List of numerical columns
+    
+    
+    """
+    ### Applying One hot encoding
+    df_in = apply_one_hot_encoding(df_in, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS)
+    
+    ### Creating Train test splits
+    X_train, X_test, y_train, y_test = create_train_test_split(df_in, target_column)
+    
+    ### Upsampling the Data
+    X_train_upsampled, y_train_upsampled = upsample(X_train, y_train)
+    
+    ### Applying Decision Tree Classifier
+    credit_tree = DecisionTreeClassifier(criterion='entropy')
+    credit_tree.fit(X_train_upsampled, y_train_upsampled)
+    
+    ### Results
+    show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, credit_tree)
+
+
     
 
 
