@@ -265,15 +265,21 @@ def get_correlation_treemap(df_in):
     TreeMap.show()
     graph_file=IMG_DIR+'treemap1.png'
     TreeMap.write_image(graph_file)
+    
+    TreeMap.write_html("../paper/images/treemap1.html")
+
     TreeMap2 = px.treemap(df_in, path=['loan_intent','person_age'],title="Loan Intent and Person Age")
     TreeMap2.show()
     graph_file=IMG_DIR+'treemap2.png'
     TreeMap2.write_image(graph_file)
+    TreeMap.write_html("../paper/images/treemap2.html")
 
     treeMap3 = px.treemap(df_in, path=['loan_intent','cb_person_default_on_file'],title="TreeMap for Loan Intent and Person default status")
     treeMap3.show()
     graph_file=IMG_DIR+'treemap3.png'
     treeMap3.write_image(graph_file)
+    TreeMap.write_html("../paper/images/treemap3.html")
+
 
 
 
