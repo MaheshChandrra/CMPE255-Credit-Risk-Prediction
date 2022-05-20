@@ -152,7 +152,7 @@ Here we compare loan status of the people who are having history of taking the l
 
 **Analysis of data using Box Plots:**
 
-Box plots are one of the best methods to check the outliers in the numerical columns of the dataset with respect to a categorical column. The numerical columns in the dataset are ‘person_age’, ‘person_income’, 'person_emp_length', 'loan_amnt', 'loan_int_rate', 'loan_percent_income', 'cb_person_cred_hist_length’. We shall plot all these columns with the loan_status(target variable) and check how is the data distributed and if there are any outliers or not.
+Since we might have any outliers in the dataset, it is best to check if there are any. Box plots are one of the best methods to check the outliers in the numerical columns of the dataset with respect to a categorical column. The numerical columns in the dataset are ‘person_age’, ‘person_income’, 'person_emp_length', 'loan_amnt', 'loan_int_rate', 'loan_percent_income', 'cb_person_cred_hist_length’. We shall plot all these columns with the loan_status(target variable) and check how is the data distributed and if there are any outliers or not.
 
 - Person Age:
 From the box plot between the loan_status and person_age, we can see that most of the people are between the age of 20 to 35. There are some outliers that do not make sense. There are some data points that suggest that a person of age 140 has loan_status ‘not default’ which is humanly impossible to live that long. Since only a few data points are above the age of 80 we can consider this to be the maximum age and remove those data above age 80.
@@ -180,7 +180,7 @@ Even though the box plots give the outliers the violin plots are used to observe
 
 From the violin plot between person age and loan_status, most of the data is around a similar range i.e. 20 to 40 for both classes.
 
-Except for the plot between the ‘loan_percent_income’ and ‘loan_status’, all the plots have a similar kind of distribution for both the classes. Only in this plot, we can see that if the loan has not defaulted the data is mostly around low loan_percent_income(0 to 0.2) and if the loan has defaulted the data is mostly around a loan_percent_income between 0.2 to 0.4.
+Except for the plot between the ‘loan_percent_income’ and ‘loan_status’, all the plots have a similar kind of distribution for both the classes. Only in this plot, we can see that if the loan has not defaulted the data is mostly around low loan_percent_income(0 to 0.2) and if the loan has defaulted the data is mostly around a loan_percent_income between 0.2 to 0.4, and also there is not much data with higher loan_percent_income and loan as not defaulted(0). Which indicates that lesser the loan_percent_income the loan might not be defaulted.
 
 |Loan Percent Income|
 |:-------------------------:|
