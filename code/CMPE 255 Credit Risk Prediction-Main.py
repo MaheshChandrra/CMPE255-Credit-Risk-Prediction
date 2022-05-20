@@ -26,12 +26,6 @@ warnings.filterwarnings('ignore')
 # In[3]:
 
 
-pip install xgboost
-
-
-# In[4]:
-
-
 file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
 
 
@@ -39,10 +33,17 @@ file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[5]:
+# In[4]:
 
 
 df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
+
+
+# In[5]:
+
+
+loan_status_dict={"0":"Not Default","1":"Default",0:"Not Default",1:"Default"}
+df_data['loan_status']=df_data['loan_status'].apply(lambda x : loan_status_dict[x])
 
 
 # ### Saving File
@@ -315,7 +316,7 @@ get_barplot(df_data)
 # In[35]:
 
 
-get_barplot_catagorical(df_data)
+# get_barplot_catagorical(df_data)
 
 
 # #### Author - Lokesh
@@ -336,44 +337,54 @@ get_barplot_catagorical(df_data)
 # get_correlation_parallel(df_data)
 
 
+# ### Result dictionary to track results from every model
+
+# In[38]:
+
+
+result_dict={}
+
+
 # ### Random Forest Classifier 
 # Author: Nikhil Kumar Kanisetty
 
-# In[38]:
+# In[39]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[39]:
+# In[40]:
 
 
 import app_models
 
 
-# In[ ]:
-
-
-df_in = df_data.copy()
-
-
 # In[41]:
 
 
-CATEGORICAL_COLUMNS = ["person_home_ownership","loan_intent","loan_grade","cb_person_default_on_file"]
+df_in = df_data.copy()
+loan_status_dict={"Not Default":0,"Default":1}
+df_in['loan_status']=df_in['loan_status'].apply(lambda x : loan_status_dict[x])
 
 
 # In[42]:
 
 
-target_column = "loan_status"
+CATEGORICAL_COLUMNS = ["person_home_ownership","loan_intent","loan_grade","cb_person_default_on_file"]
 
 
 # In[43]:
 
 
-app_models.apply_RFC(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS)
+target_column = "loan_status"
+
+
+# In[44]:
+
+
+result_dict=app_models.apply_RFC(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS,result_dict)
 
 
 # ### Applying Decision Tree Classifier
@@ -385,10 +396,15 @@ app_models.apply_RFC(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMN
 
 import app_models
 df_in = df_data.copy()
-# df_in
+
+loan_status_dict={"Not Default":0,"Default":1}
+df_in['loan_status']=df_in['loan_status'].apply(lambda x : loan_status_dict[x])
+
 CATEGORICAL_COLUMNS = ["person_home_ownership","loan_intent","loan_grade","cb_person_default_on_file"]
 target_column = "loan_status"
-app_models.apply_dt(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS)
+
+
+result_dict=app_models.apply_dt(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS,result_dict)
 
 
 # #### Normalizing the data
@@ -399,7 +415,6 @@ app_models.apply_dt(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS
 
 
 from sklearn.preprocessing import MinMaxScaler
-
 scaler = MinMaxScaler()
 df_data[NUMERICAL_COLUMNS]=scaler.fit_transform(df_data[NUMERICAL_COLUMNS])
 
@@ -436,16 +451,16 @@ warnings.filterwarnings('ignore')
 
 import app_models
 df_in=df_data.copy()
-CATEGORICAL_COLUMNS=["person_home_ownership","loan_intent","loan_grade","cb_person_default_on_file"]
-target_column="loan_status"
-app_models.apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS)
+loan_status_dict={"Not Default":0,"Default":1}
+df_in['loan_status']=df_in['loan_status'].apply(lambda x : loan_status_dict[x])
+result_dict=app_models.apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS,result_dict)
 
 
 # ### Convert notebook to app.py
 # 
 # 
 
-# In[ ]:
+# In[50]:
 
 
 get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
@@ -453,14 +468,8 @@ get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
 
 # ### Rough
 
-# In[ ]:
+# In[51]:
 
 
 df_data['person_age'].astype(int).max()
-
-
-# In[ ]:
-
-
-
 

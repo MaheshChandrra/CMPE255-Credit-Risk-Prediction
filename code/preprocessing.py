@@ -154,7 +154,7 @@ def get_correlation_heatmap(df_in):
     
     """
     ax = sns.heatmap(df_in.corr(), cmap="YlGnBu",annot=True)
-    sns.set(rc = {'figure.figsize':(20,20)})
+    #sns.set(rc = {'figure.figsize':(7,7)})
     graph_file=IMG_DIR+'coorelation_heapmatap.png'
     plt.savefig(graph_file)
     plt.show()

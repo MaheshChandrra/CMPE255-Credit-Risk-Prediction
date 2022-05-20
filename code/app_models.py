@@ -1,4 +1,5 @@
 import pandas as pd
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -20,17 +21,23 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import cohen_kappa_score
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import confusion_matrix
-
+from sklearn.metrics import plot_roc_curve
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.feature_selection import SelectFromModel
+from sklearn import datasets, metrics, model_selection, svm
+
+
 
 import warnings
 warnings.filterwarnings('ignore')
 
+IMG_DIR="../paper/images/"
 
-def show_results(X_tr,Y_tr,X_tst,y_tst,classifier):
+
+
+def show_results(X_tr,Y_tr,X_tst,y_tst,classifier,result_dict):
     
     """
     
@@ -53,21 +60,68 @@ def show_results(X_tr,Y_tr,X_tst,y_tst,classifier):
     
 
     """
+    model_name = type(classifier).__name__
+    print("[INFO] Model name:",model_name)
+    print("[INFO] Results on Train:\n")
     
-    print("Results on Train:\n")
+    
+    ### Evaluating Train Results
     y_tr_prd = classifier.predict(X_tr)
-    
     print(classification_report(Y_tr, y_tr_prd))
+    
+    print("#"*100)
+    print("\n[INFO] Evaluation Metrics on Train:\n")
+    print("\tAccuracy:",accuracy_score(Y_tr, y_tr_prd))
+    print("\tPrecision Score:",precision_score(Y_tr, y_tr_prd))
+    print("\tRecall Score:",recall_score(Y_tr, y_tr_prd))
+    print("\tF1 Score:",f1_score(Y_tr, y_tr_prd))
+    print("\n")
+    
     #plot_confusion_matrix(classifier, X_tr, Y_tr)
     plt.show()
     
     print("#"*100)
     
-    print("Results on Test:\n")
+    
+    ### Evaluating Train Results
+    print("[INFO] Results on Test:\n")
     y_tst_pred = classifier.predict(X_tst)
     print(classification_report(y_tst, y_tst_pred))
+    
+    print("\n[INFO] Evaluation Metrics on Test:\n")
+
+    test_accuracy=accuracy_score(y_tst, y_tst_pred)
+    test_precision=precision_score(y_tst, y_tst_pred)
+    test_recall=recall_score(y_tst, y_tst_pred)
+    test_f1_score=f1_score(y_tst, y_tst_pred)
+    
+    result_dict[model_name]=[test_accuracy,test_precision,test_recall,test_f1_score]
+    
+    
+
+    print("\tAccuracy:",test_accuracy)
+    print("\tPrecision Score:",test_precision)
+    print("\tRecall Score:",test_recall)
+    print("\tF1 Score:",test_f1_score)
+    print("\n")
+    
+    ### Plotting ROC-AUC Curve
+    
+    metrics.plot_roc_curve(classifier, X_tst, y_tst) 
+    graph_file=IMG_DIR+model_name+'_roc_auc_plot.png'
+    plt.savefig(graph_file)
+    plt.show()
+    
+
+    print("#"*100)
+    
     #plot_confusion_matrix(classifier, X_tst, y_tst) 
     plt.show()
+    
+    return result_dict
+
+    
+    
 
 
 def create_train_test_split(df_in,target_column):
@@ -125,12 +179,24 @@ def upsample(X_in,y_in):
     """
     
     
-    print("[INFO] Applying Upsampling")
+    print("[INFO] Before Upsampling")
+    sns.countplot(y_in)
+    graph_file=IMG_DIR+'before_upsampling.png'
+    plt.savefig(graph_file)
+    plt.show()
+    
+    print("[INFO] After Upsampling")
+    
+    ### Applying Upsampling
     oversample = SMOTE()
     X_in_upsampled, y_in_upsampled = oversample.fit_resample(X_in, y_in)
+    graph_file=IMG_DIR+'after_upsampling.png'
+    sns.countplot(y_in_upsampled)
+    plt.show()
     print("[INFO] Upsampling Completed")
     
     return X_in_upsampled, y_in_upsampled
+
 
 def apply_one_hot_encoding(df_in,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     
@@ -177,7 +243,7 @@ def apply_one_hot_encoding(df_in,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     
     
     
-def apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
+def apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS,result_dict):
     
     """
     
@@ -206,6 +272,9 @@ def apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     NUMERICAL_COLUMNS
     => List of numerical columns
     
+    result_dict
+    =>To track results of each model
+    
     
     """
     
@@ -225,11 +294,15 @@ def apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     xgb_clf = xgb.XGBClassifier()
     xgb_clf.fit(X_train_upsampled , y_train_upsampled)
     
-    show_results(X_train_upsampled,y_train_upsampled,X_test,y_test,xgb_clf)
+    result_dict=show_results(X_train_upsampled,y_train_upsampled,X_test,y_test,xgb_clf,result_dict)
+    
+    return result_dict
+    
+ 
     
     
     
-def apply_RFC(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
+def apply_RFC(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS,result_dict):
     
     """
     Author: Nikhil Kumar Kanisetty
@@ -241,10 +314,12 @@ def apply_RFC(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     - Predict using the above model
 
     params:
+    
     df -> input_df
     target -> target_column
     CATEGORICAL_COLUMNS -> all the categorical columns in the data
     NUMERICAL_COLUMNS -> all the numereical columns in the data
+    result_dict ->To track results of each model
     """
     df_in = apply_one_hot_encoding(df_in, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS)
 
@@ -256,7 +331,7 @@ def apply_RFC(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     rf = RandomForestClassifier(max_depth = 3, random_state = 100)
     rf.fit(X_train_upsampled, y_train_upsampled)
 
-    show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf)
+    result_dict=show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf,result_dict)
     
 #     grid_search = GridSearchCV(RandomForestClassifier(), {
 #                     "n_estimators": range(100, 300, 100),
@@ -272,7 +347,7 @@ def apply_RFC(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     rf = RandomForestClassifier(n_estimators = 200, max_features = 3, max_depth = 18, criterion = "entropy", random_state = 100)
     rf.fit(X_train_upsampled, y_train_upsampled)
     
-    show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf)
+    result_dict=show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf,result_dict)
     
     select_features = SelectFromModel(RandomForestClassifier(n_estimators = 200, max_features = 3, max_depth = 18,
                                                              criterion = "gini", random_state = 100))
@@ -290,10 +365,12 @@ def apply_RFC(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     print("**RANDOM FOREST CLASSIFIER with only top features**")    
     rf.fit(X_train_upsampled, y_train_upsampled)
     
-    show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf)
+    result_dict=show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf,result_dict)
+    
+    return result_dict
     
 
-def apply_dt(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
+def apply_dt(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS,result_dict):
     
     """
     
@@ -322,6 +399,9 @@ def apply_dt(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     NUMERICAL_COLUMNS
     => List of numerical columns
     
+    result_dict
+    =>To track results of each model
+    
     
     """
     ### Applying One hot encoding
@@ -338,7 +418,9 @@ def apply_dt(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     credit_tree.fit(X_train_upsampled, y_train_upsampled)
     
     ### Results
-    show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, credit_tree)
+    result_dict=show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, credit_tree,result_dict)
+    
+    return result_dict
 
 
     
