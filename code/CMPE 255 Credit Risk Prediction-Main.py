@@ -352,11 +352,10 @@ warnings.filterwarnings('ignore')
 import app_models
 
 
-# In[40]:
+# In[ ]:
 
 
 df_in = df_data.copy()
-df_in
 
 
 # In[41]:
@@ -377,17 +376,11 @@ target_column = "loan_status"
 app_models.apply_RFC(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS)
 
 
-# In[44]:
-
-
-df_in.shape
-
-
 # ### Applying Decision Tree Classifier
 # 
 # Author : Lokesh Vaddi
 
-# In[46]:
+# In[45]:
 
 
 import app_models
@@ -402,7 +395,7 @@ app_models.apply_dt(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[46]:
 
 
 from sklearn.preprocessing import MinMaxScaler
@@ -411,7 +404,7 @@ scaler = MinMaxScaler()
 df_data[NUMERICAL_COLUMNS]=scaler.fit_transform(df_data[NUMERICAL_COLUMNS])
 
 
-# In[ ]:
+# In[47]:
 
 
 df_data
@@ -431,14 +424,14 @@ df_data
 #         4.Training XGBoost
 #         5.Testing model
 
-# In[ ]:
+# In[48]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[ ]:
+# In[49]:
 
 
 import app_models

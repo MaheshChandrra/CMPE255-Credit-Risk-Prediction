@@ -251,7 +251,8 @@ def apply_RFC(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     X_train, X_test, y_train, y_test = create_train_test_split(df_in, target_column)
 
     X_train_upsampled, y_train_upsampled = upsample(X_train, y_train)
-
+    
+    print("**RANDOM FOREST CLASSIFIER with max_depth = 3**")
     rf = RandomForestClassifier(max_depth = 3, random_state = 100)
     rf.fit(X_train_upsampled, y_train_upsampled)
 
@@ -264,32 +265,32 @@ def apply_RFC(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
 #                     'criterion': ["gini", "entropy"]
 #                     }, cv = 5, n_jobs = -1, verbose = 2)
 #     grid_search.fit(X_train_upsampled, y_train_upsampled)
-#     print(grid_search.best_params_)
+#     print(f"Parameters after hyper parameter tuning: {grid_search.best_params_}")
 
 #    {'criterion': 'entropy', 'max_depth': 18, 'max_features': 3, 'n_estimators': 200}
-    
+    print("**RANDOM FOREST CLASSIFIER after hyper parameter tuning using GridSearch**")
     rf = RandomForestClassifier(n_estimators = 200, max_features = 3, max_depth = 18, criterion = "entropy", random_state = 100)
     rf.fit(X_train_upsampled, y_train_upsampled)
     
     show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf)
     
-    select_features = SelectFromModel(RandomForestClassifier(n_estimators = 200, max_features = 3, max_depth = 18, criterion = "gini", random_state = 100))
+    select_features = SelectFromModel(RandomForestClassifier(n_estimators = 200, max_features = 3, max_depth = 18,
+                                                             criterion = "gini", random_state = 100))
     select_features.fit(X_train_upsampled, y_train_upsampled)
     
     df = df_in.drop(columns = 'loan_status', axis = 1)
     columns = df.columns[(select_features.get_support())]
     
-    print(columns)
-    
+    print(f"Top Features: {columns}")
+    print()
+
     X_train_upsampled = X_train_upsampled[columns]
     X_test = X_test[columns]
     
+    print("**RANDOM FOREST CLASSIFIER with only top features**")    
     rf.fit(X_train_upsampled, y_train_upsampled)
     
     show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf)
-    
-
-    
     
 
 def apply_dt(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
