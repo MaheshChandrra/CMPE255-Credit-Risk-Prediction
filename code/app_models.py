@@ -21,6 +21,10 @@ from sklearn.metrics import cohen_kappa_score
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import confusion_matrix
 
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.feature_selection import SelectFromModel
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -224,6 +228,64 @@ def apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     
     
     
+def apply_RFC(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS):
     
+    """
+    Author: Nikhil Kumar Kanisetty
+
+    This function performs:
+    - Splitting train and test
+    - Upsample the data since the data is imbalanced
+    - Train a Random Forest Classifier
+    - Predict using the above model
+
+    params:
+    df -> input_df
+    target -> target_column
+    CATEGORICAL_COLUMNS -> all the categorical columns in the data
+    NUMERICAL_COLUMNS -> all the numereical columns in the data
+    """
+    df_in = apply_one_hot_encoding(df_in, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS)
+
+    X_train, X_test, y_train, y_test = create_train_test_split(df_in, target_column)
+
+    X_train_upsampled, y_train_upsampled = upsample(X_train, y_train)
+
+    rf = RandomForestClassifier(max_depth = 3, random_state = 100)
+    rf.fit(X_train_upsampled, y_train_upsampled)
+
+    show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf)
     
+#     grid_search = GridSearchCV(RandomForestClassifier(), {
+#                     "n_estimators": range(100, 300, 100),
+#                     "max_depth": range(2, 20, 2),
+#                     "max_features": range(1, 4),
+#                     'criterion': ["gini", "entropy"]
+#                     }, cv = 5, n_jobs = -1, verbose = 2)
+#     grid_search.fit(X_train_upsampled, y_train_upsampled)
+#     print(grid_search.best_params_)
+
+#    {'criterion': 'entropy', 'max_depth': 18, 'max_features': 3, 'n_estimators': 200}
     
+    rf = RandomForestClassifier(n_estimators = 200, max_features = 3, max_depth = 18, criterion = "entropy", random_state = 100)
+    rf.fit(X_train_upsampled, y_train_upsampled)
+    
+    show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf)
+    
+    select_features = SelectFromModel(RandomForestClassifier(n_estimators = 200, max_features = 3, max_depth = 18, criterion = "gini", random_state = 100))
+    select_features.fit(X_train_upsampled, y_train_upsampled)
+    
+    df = df_in.drop(columns = 'loan_status', axis = 1)
+    columns = df.columns[(select_features.get_support())]
+    
+    print(columns)
+    
+    X_train_upsampled = X_train_upsampled[columns]
+    X_test = X_test[columns]
+    
+    rf.fit(X_train_upsampled, y_train_upsampled)
+    
+    show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, rf)
+    
+
+

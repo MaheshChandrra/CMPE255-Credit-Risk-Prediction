@@ -330,11 +330,52 @@ get_barplot_catagorical(df_data)
 # get_correlation_parallel(df_data)
 
 
+# ### Random Forest Classifier 
+# Author: Nikhil Kumar Kanisetty
+
+# In[37]:
+
+
+import warnings
+warnings.filterwarnings('ignore')
+
+
+# In[38]:
+
+
+import app_models
+
+
+# In[39]:
+
+
+df_in = df_data.copy()
+df_in
+
+
+# In[40]:
+
+
+CATEGORICAL_COLUMNS = ["person_home_ownership","loan_intent","loan_grade","cb_person_default_on_file"]
+
+
+# In[41]:
+
+
+target_column = "loan_status"
+
+
+# In[42]:
+
+
+app_models.apply_RFC(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS)
+
+
 # #### Normalizing the data
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[37]:
+# In[43]:
 
 
 from sklearn.preprocessing import MinMaxScaler
@@ -343,7 +384,7 @@ scaler = MinMaxScaler()
 df_data[NUMERICAL_COLUMNS]=scaler.fit_transform(df_data[NUMERICAL_COLUMNS])
 
 
-# In[38]:
+# In[44]:
 
 
 df_data
@@ -363,14 +404,14 @@ df_data
 #         4.Training XGBoost
 #         5.Testing model
 
-# In[39]:
+# In[45]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[40]:
+# In[ ]:
 
 
 import app_models
@@ -384,7 +425,7 @@ app_models.apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUM
 # 
 # 
 
-# In[41]:
+# In[ ]:
 
 
 get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
@@ -392,7 +433,7 @@ get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
 
 # ### Rough
 
-# In[42]:
+# In[ ]:
 
 
 df_data['person_age'].astype(int).max()
