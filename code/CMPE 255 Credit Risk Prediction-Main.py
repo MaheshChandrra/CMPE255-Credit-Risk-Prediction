@@ -43,6 +43,7 @@ df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
 
 
 loan_status_dict={"0":"Not Default","1":"Default",0:"Not Default",1:"Default"}
+df_data['loan_status_num'] = df_data['loan_status']
 df_data['loan_status']=df_data['loan_status'].apply(lambda x : loan_status_dict[x])
 
 
@@ -325,21 +326,21 @@ get_barplot(df_data)
 # 
 # Author : Lokesh
 
-# In[36]:
+# In[ ]:
 
 
-# get_correlation_treemap(df_data)
+get_correlation_treemap(df_data)
 
 
-# In[37]:
+# In[ ]:
 
 
-# get_correlation_parallel(df_data)
+get_correlation_parallel(df_data)
 
 
 # ### Result dictionary to track results from every model
 
-# In[38]:
+# In[ ]:
 
 
 result_dict={}
@@ -348,20 +349,20 @@ result_dict={}
 # ### Random Forest Classifier 
 # Author: Nikhil Kumar Kanisetty
 
-# In[39]:
+# In[ ]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[40]:
+# In[ ]:
 
 
 import app_models
 
 
-# In[41]:
+# In[ ]:
 
 
 df_in = df_data.copy()
@@ -369,19 +370,19 @@ loan_status_dict={"Not Default":0,"Default":1}
 df_in['loan_status']=df_in['loan_status'].apply(lambda x : loan_status_dict[x])
 
 
-# In[42]:
+# In[ ]:
 
 
 CATEGORICAL_COLUMNS = ["person_home_ownership","loan_intent","loan_grade","cb_person_default_on_file"]
 
 
-# In[43]:
+# In[ ]:
 
 
 target_column = "loan_status"
 
 
-# In[44]:
+# In[ ]:
 
 
 result_dict=app_models.apply_RFC(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS,result_dict)
@@ -391,7 +392,7 @@ result_dict=app_models.apply_RFC(df_in, target_column, CATEGORICAL_COLUMNS, NUME
 # 
 # Author : Lokesh Vaddi
 
-# In[45]:
+# In[ ]:
 
 
 import app_models
@@ -411,7 +412,7 @@ result_dict=app_models.apply_dt(df_in, target_column, CATEGORICAL_COLUMNS, NUMER
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[46]:
+# In[ ]:
 
 
 from sklearn.preprocessing import MinMaxScaler
@@ -419,7 +420,7 @@ scaler = MinMaxScaler()
 df_data[NUMERICAL_COLUMNS]=scaler.fit_transform(df_data[NUMERICAL_COLUMNS])
 
 
-# In[47]:
+# In[ ]:
 
 
 df_data
@@ -439,14 +440,14 @@ df_data
 #         4.Training XGBoost
 #         5.Testing model
 
-# In[48]:
+# In[ ]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[49]:
+# In[ ]:
 
 
 import app_models
@@ -456,11 +457,25 @@ df_in['loan_status']=df_in['loan_status'].apply(lambda x : loan_status_dict[x])
 result_dict=app_models.apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS,result_dict)
 
 
+# ### Results
+
+# In[ ]:
+
+
+df_res=pd.DataFrame(data=result_dict,index=["Accuracy","Precision","Recall","F1-Score"]).T
+
+
+# In[ ]:
+
+
+df_res
+
+
 # ### Convert notebook to app.py
 # 
 # 
 
-# In[50]:
+# In[ ]:
 
 
 get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
@@ -468,7 +483,7 @@ get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
 
 # ### Rough
 
-# In[51]:
+# In[ ]:
 
 
 df_data['person_age'].astype(int).max()

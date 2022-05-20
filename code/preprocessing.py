@@ -261,19 +261,25 @@ def get_correlation_treemap(df_in):
     
     
     """
-    TreeMap = px.treemap(df_in, path=['person_age','person_income', 'loan_amnt'],title="TreeMap for Person age, Person Income and Loan Amount")
+
+    TreeMap = px.treemap(df_in, path=['person_age','person_income', 'loan_amnt'],title="TreeMap for Person age, Person Income and LoanAmount")
     TreeMap.show()
     graph_file=IMG_DIR+'treemap1.png'
     TreeMap.write_image(graph_file)
+
+    TreeMap.write_html("../paper/images/treemap1.html")
+
     TreeMap2 = px.treemap(df_in, path=['loan_intent','person_age'],title="Loan Intent and Person Age")
     TreeMap2.show()
     graph_file=IMG_DIR+'treemap2.png'
     TreeMap2.write_image(graph_file)
+    TreeMap2.write_html("../paper/images/treemap2.html")
 
     treeMap3 = px.treemap(df_in, path=['loan_intent','cb_person_default_on_file'],title="TreeMap for Loan Intent and Person default status")
     treeMap3.show()
     graph_file=IMG_DIR+'treemap3.png'
     treeMap3.write_image(graph_file)
+    treeMap3.write_html("../paper/images/treemap3.html")
 
 
 
@@ -293,14 +299,15 @@ def get_correlation_parallel(df_in):
     
     
     """
-    correlation_parallel = px.parallel_categories(df_in, dimensions=['loan_intent', 'loan_grade'])
+
+    df_in['loan_status_num'] = df_in['loan_status_num'].astype(str).astype(int)
+    correlation_parallel = px.parallel_categories(df_in, dimensions=['loan_intent', 'loan_grade'],color= 'loan_status_num')
     graph_file=IMG_DIR+'parallelplot1.png'
     correlation_parallel.write_image(graph_file)
     correlation_parallel.show()
-    correlation_parallel = px.parallel_categories(df_in, dimensions=['loan_intent', 'loan_grade', 'loan_status'])
-    graph_file=IMG_DIR+'parallelplot2.png'
-    correlation_parallel.write_image(graph_file)    
-    correlation_parallel.show()
+    correlation_parallel.write_html("../paper/images/correlation_parallel.html")
+
+
 
 
 
