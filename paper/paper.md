@@ -82,20 +82,24 @@ The correlation is positive as we can see from the below pair plot and heat map.
 From the Dataset we can make a treemap that allows us to represent a hierarchically-ordered (tree-structured) set of dataset
 
 
+
 |Treemap-1|
 :-------------------------:
 ![Treemap1](./images/treemap1.png)
 
-- From the above Treemap-1 we can observe, what is the loan amount that different age groups of people with different income ranges are requesting.
-
-- we can observe that people with age 22-28 have more loan applications than others.
+- We made Treemap for Age->Person Income->Loan amount (TreeMap1)
+- From the above TreeMap-1 we can observe, what is the loan amount that different age groups of people with different income ranges are requesting.
+- As you can observe from the above TreeMap shows the different ages when you go into those different ages groups it shows their Income and If we filter with different income's bracket we can see their requested loan amount for different Income bracket for that selected age group.
+- so from TreeMap -1 we can interpret that people with age 22-28 have more loan applications than others.
+- for interactive visualization [Click Here](./images/treemap1.html)
 
 |Treemap-2|
 :-------------------------:
 ![Treemap2](./images/treemap2.png)
 
 - Then if we observe the intent of the loan for different ages from TreeMap-2
-  we can see that most of the loan applications are for Education then followed by Medical, Venture, and personal.
+- we can see that most of the loan applications are for Education then followed by Medical, Venture, and personal.
+- for interactive visualization [Click Here](./images/treemap2.html)
 
 |Treemap-3|
 :-------------------------:
@@ -109,17 +113,21 @@ From the Dataset we can make a treemap that allows us to represent a hierarchica
   4. Personal Loans have 17.3 percent, loan defaulters.
   5. Debt consolidation Loans have 18 percent, loan defaulters.
   6. Home improvement Loans have 19.3 percent, loan defaulters.
+- for interactive visualization [Click Here](./images/treemap3.html)
+
 
 From the dataset, we can make a Parallel coordinates plot is used to analyze multivariate data
 
 ![Parallel Plot 1](./images/parallelplot1.png)
 
-From the below Parallel plot we can observe how the loan grade is divided for the different Loan intents for the different situations.
-From Parallel plot 2 we can see the Loan status for the different loan grades for different loan intents.
-
-![Parallel Plot 2](./images/parallelplot2.png)
+From the above Parallel plot we can observe how the loan grade is divided for the different Loan intents for the different situations.
+- for interactive visualization [Click Here](./images/correlation_parallel.html)
 
 **Analysis of data using Bar Plots:**
+
+Bar plots are commonly used to show the difference between categories or discrete data. It helps in the detection of any possible relationships between categorical variables. If your dataset has several categorical variables, a bar plot is one of the best choices. It's used to compare counts, present a variable function by category, and understand how categorical variables are related.
+
+The categorical columns in the dataset are person_home_ownership,loan_intent,loan_grade,cb_person_default_on_file with target value as ‘loan_status’ 
 
 |Person_home_ownership|
 :-------------------------:
@@ -132,17 +140,12 @@ The graph containing person_home_ownership with target variable loan_status show
 ![loan_intent](./images/2_bar_plot_catagorical.png)
 
 Here, when we compare on basis of loan_intent with target variable loan_status from the plot, we can see that when loan is intended for medical reasons and debt consolidation it is more likely to be default and risky for the lender. The same way when the loan intent is venture or home improvement, it is least likely to default .
-|loan_grade|
-:-------------------------:
-![loan_grade](./images/3_bar_plot_catagorical.png)
-
-Here the above graph shows loan_grade with target label loan status(loan_status) where we consider 0 as non-default and 1 as default .It helps us to measure the risk grade, which means the higher the risk, the less likely the loan is to be approved and vice versa.
 
 |loan_status|
 :-------------------------:
 ![loan_status](./images/4_bar_plot_catagorical.png)
 
-From the above graph loan status we can say that the dataset is biased as the cases where the frequency of loans being rejected are far less than the frequency of loans that are being approved.
+From the above graph loan status we can say that the dataset is imbalanced as the cases where the frequency of loans being rejected are far less than the frequency of loans that are being approved.From the plot we can observe that the dataset is biased towards 'not default'.So we should try to balance the dataset.
 
 |cb_person_default_on_file|
 :---------------------------:
@@ -188,7 +191,16 @@ Except for the plot between the ‘loan_percent_income’ and ‘loan_status’,
 
 # Comparisons
 
-# Example Analysis
+Results after applying multiple models on the dataset.
+
+| Model                  | Accuracy | Precision | Recall   | F1-Score |
+| ---------------------- | -------- | --------- | -------- | -------- |
+| RandomForestClassifier | 0.900432 | 0.825745  | 0.690644 | 0.752176 |
+| DecisionTreeClassifier | 0.890249 | 0.73917   | 0.770099 | 0.754317 |
+| XGBClassifier          | 0.933244 | 0.941986  | 0.74048  | 0.829166 |
+| LogisticRegression     | 0.811767 | 0.550084  | 0.766808 | 0.640613 |
+
+
 
 # Conclusions
 
