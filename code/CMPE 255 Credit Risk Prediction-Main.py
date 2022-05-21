@@ -275,25 +275,25 @@ get_correlation_heatmap(df_data)
 df_data
 
 
-# In[ ]:
+# In[85]:
 
 
 get_correlation_pairplot(df_data[NUMERICAL_COLUMNS])
 
 
-# In[ ]:
+# In[86]:
 
 
 get_correlation_pairplot(df_data[['person_age', 'person_income', 'loan_amnt','loan_status']],'loan_status')
 
 
-# In[ ]:
+# In[87]:
 
 
 NUMERICAL_COLUMNS.remove('cb_person_cred_hist_length')
 
 
-# In[ ]:
+# In[88]:
 
 
 NUMERICAL_COLUMNS
@@ -308,13 +308,13 @@ NUMERICAL_COLUMNS
 # 
 # 
 
-# In[ ]:
+# In[110]:
 
 
 get_barplot(df_data)
 
 
-# In[ ]:
+# In[90]:
 
 
 get_barplot_catagorical(df_data)
@@ -326,13 +326,13 @@ get_barplot_catagorical(df_data)
 # 
 # Author : Lokesh
 
-# In[ ]:
+# In[91]:
 
 
 get_correlation_treemap(df_data)
 
 
-# In[ ]:
+# In[92]:
 
 
 get_correlation_parallel(df_data)
@@ -340,7 +340,7 @@ get_correlation_parallel(df_data)
 
 # ### Result dictionary to track results from every model
 
-# In[ ]:
+# In[93]:
 
 
 result_dict={}
@@ -349,20 +349,20 @@ result_dict={}
 # ### Random Forest Classifier 
 # Author: Nikhil Kumar Kanisetty
 
-# In[ ]:
+# In[94]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[ ]:
+# In[95]:
 
 
 import app_models
 
 
-# In[ ]:
+# In[96]:
 
 
 df_in = df_data.copy()
@@ -370,19 +370,19 @@ loan_status_dict={"Not Default":0,"Default":1}
 df_in['loan_status']=df_in['loan_status'].apply(lambda x : loan_status_dict[x])
 
 
-# In[ ]:
+# In[97]:
 
 
 CATEGORICAL_COLUMNS = ["person_home_ownership","loan_intent","loan_grade","cb_person_default_on_file"]
 
 
-# In[ ]:
+# In[98]:
 
 
 target_column = "loan_status"
 
 
-# In[ ]:
+# In[99]:
 
 
 result_dict=app_models.apply_RFC(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS,result_dict)
@@ -392,7 +392,7 @@ result_dict=app_models.apply_RFC(df_in, target_column, CATEGORICAL_COLUMNS, NUME
 # 
 # Author : Lokesh Vaddi
 
-# In[ ]:
+# In[100]:
 
 
 import app_models
@@ -412,7 +412,7 @@ result_dict=app_models.apply_dt(df_in, target_column, CATEGORICAL_COLUMNS, NUMER
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[101]:
 
 
 from sklearn.preprocessing import MinMaxScaler
@@ -420,7 +420,7 @@ scaler = MinMaxScaler()
 df_data[NUMERICAL_COLUMNS]=scaler.fit_transform(df_data[NUMERICAL_COLUMNS])
 
 
-# In[ ]:
+# In[102]:
 
 
 df_data
@@ -440,14 +440,14 @@ df_data
 #         4.Training XGBoost
 #         5.Testing model
 
-# In[ ]:
+# In[103]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[ ]:
+# In[104]:
 
 
 import app_models
@@ -460,7 +460,7 @@ result_dict=app_models.apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUM
 # ### Applying Logistic Regression¶
 # Author : Shanmuk
 
-# In[ ]:
+# In[105]:
 
 
 df_in = df_data.copy()
@@ -471,13 +471,13 @@ result_dict=app_models.apply_lregression(df_in,target_column,CATEGORICAL_COLUMNS
 
 # ### Results
 
-# In[ ]:
+# In[106]:
 
 
 df_res=pd.DataFrame(data=result_dict,index=["Accuracy","Precision","Recall","F1-Score"]).T
 
 
-# In[ ]:
+# In[107]:
 
 
 df_res
@@ -487,7 +487,7 @@ df_res
 # 
 # 
 
-# In[ ]:
+# In[108]:
 
 
 get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
@@ -495,7 +495,7 @@ get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
 
 # ### Rough
 
-# In[ ]:
+# In[109]:
 
 
 df_data['person_age'].astype(int).max()
