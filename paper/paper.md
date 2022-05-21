@@ -192,7 +192,16 @@ Except for the plot between the ‘loan_percent_income’ and ‘loan_status’,
 
 # Comparisons
 
-# Example Analysis
+Results after applying multiple models on the dataset.
+
+| Model                  | Accuracy | Precision | Recall   | F1-Score |
+| ---------------------- | -------- | --------- | -------- | -------- |
+| RandomForestClassifier | 0.900432 | 0.825745  | 0.690644 | 0.752176 |
+| DecisionTreeClassifier | 0.890249 | 0.73917   | 0.770099 | 0.754317 |
+| XGBClassifier          | 0.933244 | 0.941986  | 0.74048  | 0.829166 |
+| LogisticRegression     | 0.811767 | 0.550084  | 0.766808 | 0.640613 |
+
+
 
 # Conclusions
 
