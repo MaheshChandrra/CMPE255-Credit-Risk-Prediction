@@ -375,16 +375,16 @@ def get_barplot_catagorical(df_in):
     """
 
     df_catagorical_col=df_in.select_dtypes(include=['object'])
-    count = 1
+    count =1
     for i in df_catagorical_col:
         plt.figure(figsize=(12,5))
-        count_plot=sns.countplot(data=df_catagorical_col, y= df_catagorical_col[i],hue=df_in['loan_status'].astype(int),palette='RdYlBu_r')
+        count_plot=sns.countplot(x=df_catagorical_col[i], hue="loan_status", data=df_catagorical_col,palette='RdYlBu_r')
         count_plot.bar_label(count_plot.containers[0])
         count_plot.bar_label(count_plot.containers[1])
         graph_file=IMG_DIR+str(count)+'_bar_plot_catagorical.png'
         plt.savefig(graph_file)
-        count = count +1
-        plt.show()
+        count= count+1
+        plt.show()    
         
 def get_box_plots(df_in, x_col, y_cols):
     """

@@ -3,7 +3,7 @@
 
 # ### Importing modules
 
-# In[7]:
+# In[1]:
 
 
 import pandas as pd
@@ -16,14 +16,14 @@ import properties
 import app_models
 
 
-# In[8]:
+# In[2]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[9]:
+# In[3]:
 
 
 file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
@@ -33,13 +33,13 @@ file_path=properties.DATASET_DIR+properties.DATASET_FILENAME
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[10]:
+# In[4]:
 
 
 df_data=read_dataset(properties.DATASET_DIR+properties.DATASET_FILENAME)
 
 
-# In[11]:
+# In[5]:
 
 
 loan_status_dict={"0":"Not Default","1":"Default",0:"Not Default",1:"Default"}
@@ -51,7 +51,7 @@ df_data['loan_status']=df_data['loan_status'].apply(lambda x : loan_status_dict[
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[12]:
+# In[6]:
 
 
 save_file(df_data,properties.DATASET_DIR)
@@ -90,7 +90,7 @@ save_file(df_data,properties.DATASET_DIR)
 
 # #### Dropping Duplicate Records
 
-# In[14]:
+# In[7]:
 
 
 print("Length of data:",len(df_data))
@@ -102,13 +102,13 @@ print("Length of data  after dropping duplicates:",len(df_data.drop_duplicates()
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[15]:
+# In[8]:
 
 
 missing_columns_list=check_missing_columns(df_data)
 
 
-# In[16]:
+# In[9]:
 
 
 print("Missing data in columns:",missing_columns_list)
@@ -118,7 +118,7 @@ print("Missing data in columns:",missing_columns_list)
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[17]:
+# In[10]:
 
 
 for col in missing_columns_list:
@@ -129,37 +129,37 @@ for col in missing_columns_list:
 # 
 # Author: Mahesh Chandra Mareedu
 
-# In[18]:
+# In[11]:
 
 
 df_data,imputed_value_dict=impute_missing_values(df_data,missing_columns_list)
 
 
-# In[19]:
+# In[12]:
 
 
 imputed_value_dict
 
 
-# In[20]:
+# In[13]:
 
 
 df_impute=pd.DataFrame(imputed_value_dict.items(), columns=['Column', 'Mean Value'])
 
 
-# In[21]:
+# In[14]:
 
 
 df_impute
 
 
-# In[22]:
+# In[15]:
 
 
 df_data.columns
 
 
-# In[23]:
+# In[16]:
 
 
 df_data.columns
@@ -167,7 +167,7 @@ df_data.columns
 
 # #### Converting datatype object to float for all numerical columns
 
-# In[24]:
+# In[17]:
 
 
 NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt',
@@ -175,7 +175,7 @@ NUMERICAL_COLUMNS=['person_age', 'person_income','person_emp_length', 'loan_amnt
 TARGET_LABEL='loan_status'
 
 
-# In[25]:
+# In[18]:
 
 
 for col in NUMERICAL_COLUMNS:
@@ -187,13 +187,13 @@ for col in NUMERICAL_COLUMNS:
 #     - Violin charts
 # 
 
-# In[26]:
+# In[19]:
 
 
 get_box_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 
 
-# In[27]:
+# In[20]:
 
 
 get_violin_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
@@ -206,13 +206,13 @@ get_violin_plots(df_data, 'loan_status', NUMERICAL_COLUMNS)
 # Considering the average persons age is around 80,discarding all the values where age is greater than 80.
 # 
 
-# In[28]:
+# In[21]:
 
 
 df_data[df_data['person_age']>80]
 
 
-# In[29]:
+# In[22]:
 
 
 df_data=df_data[df_data['person_age']<80].reset_index(drop=True)
@@ -222,19 +222,19 @@ df_data=df_data[df_data['person_age']<80].reset_index(drop=True)
 # 
 # Considering the the retirement period is 60 years,max employement for a person would be 40-45 yrs if he/she starts working around 15-20.Discarding where employment period is greater than 41.
 
-# In[30]:
+# In[23]:
 
 
 df_data[df_data['person_emp_length']>41]
 
 
-# In[31]:
+# In[24]:
 
 
 df_data=df_data[df_data['person_emp_length']<41].reset_index(drop=True)
 
 
-# In[32]:
+# In[25]:
 
 
 df_data
@@ -244,14 +244,14 @@ df_data
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[33]:
+# In[26]:
 
 
 TARGET_LABEL='loan_status'
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,True)
 
 
-# In[34]:
+# In[27]:
 
 
 get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
@@ -263,37 +263,37 @@ get_distplot(df_data,NUMERICAL_COLUMNS,TARGET_LABEL,False)
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[35]:
+# In[28]:
 
 
 get_correlation_heatmap(df_data)
 
 
-# In[36]:
+# In[29]:
 
 
 df_data
 
 
-# In[37]:
+# In[30]:
 
 
 get_correlation_pairplot(df_data[NUMERICAL_COLUMNS])
 
 
-# In[38]:
+# In[31]:
 
 
 get_correlation_pairplot(df_data[['person_age', 'person_income', 'loan_amnt','loan_status']],'loan_status')
 
 
-# In[41]:
+# In[32]:
 
 
 NUMERICAL_COLUMNS.remove('cb_person_cred_hist_length')
 
 
-# In[42]:
+# In[33]:
 
 
 NUMERICAL_COLUMNS
@@ -308,7 +308,7 @@ NUMERICAL_COLUMNS
 # 
 # 
 
-# In[43]:
+# In[34]:
 
 
 get_barplot(df_data)
@@ -317,7 +317,7 @@ get_barplot(df_data)
 # In[35]:
 
 
-# get_barplot_catagorical(df_data)
+get_barplot_catagorical(df_data)
 
 
 # #### Author - Lokesh
@@ -326,13 +326,13 @@ get_barplot(df_data)
 # 
 # Author : Lokesh
 
-# In[ ]:
+# In[36]:
 
 
 get_correlation_treemap(df_data)
 
 
-# In[ ]:
+# In[37]:
 
 
 get_correlation_parallel(df_data)
@@ -340,7 +340,7 @@ get_correlation_parallel(df_data)
 
 # ### Result dictionary to track results from every model
 
-# In[44]:
+# In[38]:
 
 
 result_dict={}
@@ -349,20 +349,20 @@ result_dict={}
 # ### Random Forest Classifier 
 # Author: Nikhil Kumar Kanisetty
 
-# In[45]:
+# In[39]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[46]:
+# In[40]:
 
 
 import app_models
 
 
-# In[47]:
+# In[41]:
 
 
 df_in = df_data.copy()
@@ -370,19 +370,19 @@ loan_status_dict={"Not Default":0,"Default":1}
 df_in['loan_status']=df_in['loan_status'].apply(lambda x : loan_status_dict[x])
 
 
-# In[48]:
+# In[42]:
 
 
 CATEGORICAL_COLUMNS = ["person_home_ownership","loan_intent","loan_grade","cb_person_default_on_file"]
 
 
-# In[49]:
+# In[43]:
 
 
 target_column = "loan_status"
 
 
-# In[ ]:
+# In[44]:
 
 
 result_dict=app_models.apply_RFC(df_in, target_column, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS,result_dict)
@@ -392,7 +392,7 @@ result_dict=app_models.apply_RFC(df_in, target_column, CATEGORICAL_COLUMNS, NUME
 # 
 # Author : Lokesh Vaddi
 
-# In[ ]:
+# In[45]:
 
 
 import app_models
@@ -412,7 +412,7 @@ result_dict=app_models.apply_dt(df_in, target_column, CATEGORICAL_COLUMNS, NUMER
 # 
 # Author : Mahesh Chandra Mareedu
 
-# In[ ]:
+# In[46]:
 
 
 from sklearn.preprocessing import MinMaxScaler
@@ -420,7 +420,7 @@ scaler = MinMaxScaler()
 df_data[NUMERICAL_COLUMNS]=scaler.fit_transform(df_data[NUMERICAL_COLUMNS])
 
 
-# In[ ]:
+# In[47]:
 
 
 df_data
@@ -440,14 +440,14 @@ df_data
 #         4.Training XGBoost
 #         5.Testing model
 
-# In[ ]:
+# In[48]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[ ]:
+# In[49]:
 
 
 import app_models
@@ -457,10 +457,10 @@ df_in['loan_status']=df_in['loan_status'].apply(lambda x : loan_status_dict[x])
 result_dict=app_models.apply_XGBoost(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS,result_dict)
 
 
-# ### Applying Logstic Regression¶
+# ### Applying Logistic Regression¶
 # Author : Shanmuk
 
-# In[ ]:
+# In[50]:
 
 
 df_in = df_data.copy()
@@ -471,13 +471,13 @@ result_dict=app_models.apply_lregression(df_in,target_column,CATEGORICAL_COLUMNS
 
 # ### Results
 
-# In[ ]:
+# In[51]:
 
 
 df_res=pd.DataFrame(data=result_dict,index=["Accuracy","Precision","Recall","F1-Score"]).T
 
 
-# In[ ]:
+# In[52]:
 
 
 df_res
@@ -495,8 +495,14 @@ get_ipython().system('jupyter nbconvert CMPE*.ipynb --to python')
 
 # ### Rough
 
-# In[ ]:
+# In[54]:
 
 
 df_data['person_age'].astype(int).max()
+
+
+# In[ ]:
+
+
+
 
