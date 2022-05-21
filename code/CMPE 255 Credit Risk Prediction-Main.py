@@ -326,13 +326,13 @@ get_barplot_catagorical(df_data)
 # 
 # Author : Lokesh
 
-# In[ ]:
+# In[36]:
 
 
 get_correlation_treemap(df_data)
 
 
-# In[ ]:
+# In[37]:
 
 
 get_correlation_parallel(df_data)
@@ -340,7 +340,7 @@ get_correlation_parallel(df_data)
 
 # ### Result dictionary to track results from every model
 
-# In[ ]:
+# In[38]:
 
 
 result_dict={}
@@ -349,20 +349,20 @@ result_dict={}
 # ### Random Forest Classifier 
 # Author: Nikhil Kumar Kanisetty
 
-# In[ ]:
+# In[39]:
 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-# In[ ]:
+# In[40]:
 
 
 import app_models
 
 
-# In[ ]:
+# In[41]:
 
 
 df_in = df_data.copy()
@@ -370,13 +370,13 @@ loan_status_dict={"Not Default":0,"Default":1}
 df_in['loan_status']=df_in['loan_status'].apply(lambda x : loan_status_dict[x])
 
 
-# In[ ]:
+# In[42]:
 
 
 CATEGORICAL_COLUMNS = ["person_home_ownership","loan_intent","loan_grade","cb_person_default_on_file"]
 
 
-# In[ ]:
+# In[43]:
 
 
 target_column = "loan_status"
