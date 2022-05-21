@@ -67,7 +67,7 @@ def show_results(X_tr,Y_tr,X_tst,y_tst,classifier,result_dict):
     
     ### Evaluating Train Results
     y_tr_prd = classifier.predict(X_tr)
-    print(classification_report(Y_tr, y_tr_prd))
+    print(classification_report(Y_tr, y_tr_prd,target_names=["Not Default","Default"]))
     
     print("#"*100)
     print("\n[INFO] Evaluation Metrics on Train:\n")
@@ -86,7 +86,7 @@ def show_results(X_tr,Y_tr,X_tst,y_tst,classifier,result_dict):
     ### Evaluating Train Results
     print("[INFO] Results on Test:\n")
     y_tst_pred = classifier.predict(X_tst)
-    print(classification_report(y_tst, y_tst_pred))
+    print(classification_report(y_tst, y_tst_pred,target_names=["Not Default","Default"]))
     
     print("\n[INFO] Evaluation Metrics on Test:\n")
 
@@ -421,6 +421,59 @@ def apply_dt(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS,result_di
     result_dict=show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, credit_tree,result_dict)
     
     return result_dict
+
+def apply_lregression(df_in,target_column,CATEGORICAL_COLUMNS,NUMERICAL_COLUMNS,result_dict):
+    
+    """
+    
+    Author : Shanmuk
+
+    This funtion performs:
+        
+        1.One hot encoding
+        2.Train test split
+        3.Upsampling
+        4.Training Logistic Regression Classifier
+        5.Testing model
+        
+    Params:
+    -----------------
+    
+    df_in
+    => Input dataframe
+    
+    target_column
+    =>target column in the dataset
+    
+    CATEGORICAL_COLUMNS
+    => List of categorical columns
+    
+    NUMERICAL_COLUMNS
+    => List of numerical columns
+    
+    result_dict
+    =>To track results of each model
+    
+    
+    """
+    ### Applying One hot encoding
+    df_in = apply_one_hot_encoding(df_in, CATEGORICAL_COLUMNS, NUMERICAL_COLUMNS)
+    
+    ### Creating Train test splits
+    X_train, X_test, y_train, y_test = create_train_test_split(df_in, target_column)
+    
+    ### Upsampling the Data
+    X_train_upsampled, y_train_upsampled = upsample(X_train, y_train)
+    
+    ### Applying logistic regression Classifier
+    lr_clf = LogisticRegression()
+    lr_clf.fit(X_train_upsampled, y_train_upsampled)
+    
+    ### Results
+    result_dict=show_results(X_train_upsampled, y_train_upsampled, X_test, y_test, lr_clf,result_dict)
+    
+    return result_dict
+
 
 
     
