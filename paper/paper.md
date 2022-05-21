@@ -125,6 +125,10 @@ From the above Parallel plot we can observe how the loan grade is divided for th
 
 **Analysis of data using Bar Plots:**
 
+Bar plots are commonly used to show the difference between categories or discrete data. It helps in the detection of any possible relationships between categorical variables. If your dataset has several categorical variables, a bar plot is one of the best choices. It's used to compare counts, present a variable function by category, and understand how categorical variables are related.
+
+The categorical columns in the dataset are person_home_ownership,loan_intent,loan_grade,cb_person_default_on_file with target value as ‘loan_status’ 
+
 |Person_home_ownership|
 :-------------------------:
 ![Person_house_ownership](./images/1_bar_plot_catagorical.png)
@@ -136,17 +140,12 @@ The graph containing person_home_ownership with target variable loan_status show
 ![loan_intent](./images/2_bar_plot_catagorical.png)
 
 Here, when we compare on basis of loan_intent with target variable loan_status from the plot, we can see that when loan is intended for medical reasons and debt consolidation it is more likely to be default and risky for the lender. The same way when the loan intent is venture or home improvement, it is least likely to default .
-|loan_grade|
-:-------------------------:
-![loan_grade](./images/3_bar_plot_catagorical.png)
-
-Here the above graph shows loan_grade with target label loan status(loan_status) where we consider 0 as non-default and 1 as default .It helps us to measure the risk grade, which means the higher the risk, the less likely the loan is to be approved and vice versa.
 
 |loan_status|
 :-------------------------:
 ![loan_status](./images/4_bar_plot_catagorical.png)
 
-From the above graph loan status we can say that the dataset is biased as the cases where the frequency of loans being rejected are far less than the frequency of loans that are being approved.
+From the above graph loan status we can say that the dataset is imbalanced as the cases where the frequency of loans being rejected are far less than the frequency of loans that are being approved.From the plot we can observe that the dataset is biased towards 'not default'.So we should try to balance the dataset.
 
 |cb_person_default_on_file|
 :---------------------------:
