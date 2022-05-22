@@ -1,6 +1,4 @@
-
-
-y_tst, y_tst_pre\documentclass[12pt]{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx} % Allows you to insert figures
 \usepackage{amsmath} % Allows you to do equations
@@ -208,30 +206,44 @@ Given data, there is a possibility that multiple features might express the same
 \includegraphics[width=10cm, height=8cm]{coorelation_heapmatap.png}
 \caption{Co-relation Heat map}
 \end{figure}
+
+From Figure 4 and Figure 5, we can observe that there is high positive correlation between the features cb\_person\_cred\_hist\_length and person\_age haveing high collinearity of 88\%. 
+
 \begin{figure}[h] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
 \centering
 \includegraphics[width=9cm, height=6cm]{pairplot.png}
 \caption{Pair plot among numerical features}
 \end{figure}
-
-From Figure 4 and Figure 5, we can observe that there is high positive correlation between the features cb\_person\_cred\_hist\_length and person\_age haveing high collinearity of 88\%. As collinearity is high we are dropping the feature cb\_person\_cred\_hist\_length in the further processes.
-
-
+As collinearity is high we are dropping the feature cb\_person\_cred\_hist\_length in the further processes.
 
 
 \subsubsection{Findings from EDA}
 
+
+We made Treemap for Age-Person Income-Loan amount (Figure 6)
+From the below Figure 6 we can observe, what is the loan amount that different age groups of people with different income ranges are requesting.
+As you can observe from the above TreeMap shows the different ages when you go into those different ages groups it shows their Income and If we filter with different income's bracket we can see their requested loan amount for different Income bracket for that selected age group.
+so from Figure 6 we can interpret that people with age 22-28 have more loan applications than others.
 \begin{figure}[!h] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
 \centering
 \includegraphics[width=10cm, height=8cm]{treemap1.png}
 \caption{TreeMap for Person Age, Person Income and Loan Amount}
 \end{figure}
-We made Treemap for Age-Person Income-Loan amount (Figure 6)
-From the above Figure 6 we can observe, what is the loan amount that different age groups of people with different income ranges are requesting.
-As you can observe from the above TreeMap shows the different ages when you go into those different ages groups it shows their Income and If we filter with different income's bracket we can see their requested loan amount for different Income bracket for that selected age group.
-so from Figure we can interpret that people with age 22-28 have more loan applications than others.
 
-
+We made a bar plot on the categorical variable person home ownership with the target variable loan status (Figure 7).From the plot we can notice that people who live in rented places are more likely to default when compared to others, who are least likely to default.
+\begin{figure}[!h] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
+\centering
+\includegraphics[width=10cm, height=8cm]{1_bar_plot_catagorical.png}
+\caption{Bar plot for Person home ownership}
+\end{figure}
+ 
+ 
+ \begin{figure}[!h] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
+\centering
+\includegraphics[width=10cm, height=8cm]{4_bar_plot_catagorical.png}
+\caption{Bar plot for loan status}
+\end{figure}
+ From the Figure 8 , we can observe that the dataset is imbalanced as the cases where the frequency of loans being rejected are far less than the frequency of loans that are being approved. We can interpret that the dataset is biased towards 'not default'.As a result, we should use up sampling and try to balance the dataset.
 
 \section{Model Training and Testing}
 
