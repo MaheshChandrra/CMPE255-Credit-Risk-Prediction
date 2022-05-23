@@ -208,9 +208,11 @@ Results after applying multiple models on the dataset.
 - To add strength to the model, in future we plan to add additional features to the dataset and testing it with neural networks.
 
 # References
-Farzad, Shahbazi (2019) Using decision tree classification algorithm to design and construct the credit rating model for banking customers.
-
+- Farzad, Shahbazi (2019) Using decision tree classification algorithm to design and construct the credit rating model for banking customers.
 - Tzu-Tsung Wong, Shang-Jung Yeh(2019), Weighted Random Forests for Evaluating Financial Credit Risk.
 - Ali Al-Aradi(2014), Credit Scoring via Logistic Regression.
 - Oliver Takawira, John W.Muteba Mwamba (2022), Sovereign Credit Ratings Analysis Using the Logistic Regression Model.
 - Kui Wanga, Meixuan Li, Jingyi Cheng, Xiaomeng Zhou, Gang Li (2022), Research on personal credit risk evaluation based on XGBoost.
+
+# Presentation
+https://youtu.be/A3i1gFGCtTc
