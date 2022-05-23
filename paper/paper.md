@@ -208,9 +208,9 @@ After evaluating the performance of all the models,we understand that tree based
 Though the dataset is balanced by duplicating the minority class,adding additional data points in future might make the model much robust.To add strength to the model,in future we plan to add additional features to the dataset and testing it with neural networks.
 
 # References
-[1] Farzad, Shahbazi (2019), Using decision tree classification algorithm to design and construct the credit rating model for banking customers.
-[2] Tzu-Tsung Wong, Shang-Jung Yeh(2019), Weighted Random Forests for Evaluating Financial Credit Risk
-[3] Ali Al-Aradi(2014), Credit Scoring via Logistic Regression
-[4] Oliver Takawira, John W.Muteba Mwamba (2022), Sovereign Credit Ratings Analysis Using the Logistic Regression Model
+[1] Farzad, Shahbazi (2019), Using decision tree classification algorithm to design and construct the credit rating model for banking customers.\
+[2] Tzu-Tsung Wong, Shang-Jung Yeh(2019), Weighted Random Forests for Evaluating Financial Credit Risk\
+[3] Ali Al-Aradi(2014), Credit Scoring via Logistic Regression\
+[4] Oliver Takawira, John W.Muteba Mwamba (2022), Sovereign Credit Ratings Analysis Using the Logistic Regression Model\
 [5] Kui Wanga, Meixuan Li, Jingyi Cheng, Xiaomeng Zhou, Gang Li (2022), Research on personal credit risk evaluation based on XGBoost
 
