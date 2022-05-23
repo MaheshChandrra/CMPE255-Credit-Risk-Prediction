@@ -183,38 +183,44 @@ loan-int-rate and loan-intent are two columns found to have missing values.  The
 
 \subsubsection{Removing Outliers}We have looked at the box plots of all the features. Out of all the features we have analyzed that there are few customer records whose age(person-age) is greater than 80. Considering normal expected age as 80 yrs. We have discarded data of customers whose age is greater than 80.
 
-\begin{figure}[h] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
+\begin{figure}[!htb] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
 \centering
 \includegraphics[width=12cm, height=4cm]{personAge_box_plot.png}
 \caption{Box plot of person\_age feature}
 \end{figure}
 
-For feature person-emp-length, considering the the retirement period is 60 years, max employment for a person would be 40-45 yrs if he/she starts working around 15-20. So we discarded data of persons where employment period is greater than 41.
 
-\begin{figure}[h] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
+
+\begin{figure}[!htb] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
 \centering
 \includegraphics[width=12cm, height=4cm]{personEmpLength_box_plot.png}
 \caption{Box plot of person\_emp\_length feature}
 \end{figure}
 
+For feature person-emp-length, considering the the retirement period is 60 years, max employment for a person would be 40-45 yrs if he/she starts working around 15-20. So we discarded data of persons where employment period is greater than 41.
+
 \subsubsection{Correlation among features}
 
 Given data, there is a possibility that multiple features might express the same behavior. To eliminate this correlation, we have produced heat maps and pair plots on numerical data. Analyzing the heat maps gives us a picture of how correlated two features are with respective to each other. By visualizing the pair plots we can analyze the alignment of data points. The distribution direction of data points explains us whether the correlation is negative or positive.
 
-\begin{figure}[h] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
+From below figures Figure 4 and Figure 5, we can observe that there is high positive correlation between the features cb\_person\_cred\_hist\_length and person\_age haveing high collinearity of 88\%. 
+
+
+As collinearity is high we are dropping the feature cb\_person\_cred\_hist\_length in the further processes.
+
+\begin{figure}[!htb] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
 \centering
 \includegraphics[width=10cm, height=8cm]{coorelation_heapmatap.png}
 \caption{Co-relation Heat map}
 \end{figure}
 
-From Figure 4 and Figure 5, we can observe that there is high positive correlation between the features cb\_person\_cred\_hist\_length and person\_age haveing high collinearity of 88\%. 
-
-\begin{figure}[h] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
+\begin{figure}[!htb] % h - Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot)
 \centering
 \includegraphics[width=9cm, height=6cm]{pairplot.png}
 \caption{Pair plot among numerical features}
 \end{figure}
-As collinearity is high we are dropping the feature cb\_person\_cred\_hist\_length in the further processes.
+
+
 
 
 \subsubsection{Findings from EDA}
@@ -291,7 +297,7 @@ After dividing the dataset into two subsets as training set and test set, we per
 
 For solving the problem we have applied multiple models on the dataset.
 Below are the few models we applied and the processes involved.
-
+ 
 \subsubsection{Random Forest Classifier}
 
 In this module, we will create several random forest models for our dataset and see which of them works best. We will create a simple random forest, then tune its parameters using GridSearchCV, and then form a model using only the features selected through the SelectFromModel() method. As our dataset is imbalanced, we first upsample it and then use it to train our models.
@@ -300,7 +306,7 @@ Initially, we create a simple random forest classifier, with max\_depth set to 3
 
 \subsubsection{Decision Tree Classifier}
 As the decision tree's are widely used in banking sector, we have created Decision Tree model for our dataset. Decision Tress are easy to interpret. After a little explanation, we can grasp decision tree models, but decision-tree learners can produce too complicated trees that do not generalize data well. For this overfitting problem we tried to solve using techniques like pruning.
-Results of the decision tree algorithm on the dataset are much more interesting than LogisticRegression as we got 89\% accuracy.
+Results of the decision tree algorithm on the dataset are much more interesting than Logistic Regression as we got 89\% accuracy.
 
 \subsubsection{Logistic Regression}
 Logistic regression is one of the popular machine learning techniques which comes under the category of supervised learning techniques. It’s used for predicting categorically dependent variables using a set of independent variables. It is widely used for binary classification like yes or no , default or not default. Logistic Regression is relatively faster than other supervised classification techniques or ensemble methods, but it is less accurate. With logistic regression we got an accuracy of 81\% and precision of 55\%.
