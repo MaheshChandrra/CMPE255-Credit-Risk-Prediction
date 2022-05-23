@@ -93,7 +93,7 @@ Below are the to-do items:
     *   ROC-AUC Curve
 * Parameter tuning
 * Saving model
-* Deployment using flask
+* Deployment 
     
 
 ## Setup
